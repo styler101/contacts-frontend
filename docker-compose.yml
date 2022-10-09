@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  app:
+    image: "node:16.17-alpine3.15"
+    container_name: "mycontacts"
+    ports:
+      - "3000:3000"
+    command: yarn start
+    working_dir: /app
+    volumes:
+      - .:/app
