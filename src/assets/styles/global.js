@@ -12,7 +12,7 @@ export default createGlobalStyle`
 
 
 body{
-  background-color: ${({ theme }) => theme.colors.backgroundColor};
+  background-color: ${({ theme }) => theme.colors.background};
   font-size: ${({ theme }) => theme.typography.text};
   }
 
@@ -23,6 +23,8 @@ body{
 
   a{
     text-decoration:none;
+
+
   }
 
 
