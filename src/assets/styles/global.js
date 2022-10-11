@@ -7,7 +7,7 @@ export default createGlobalStyle`
   margin: 0;
   outline: 0;
   box-sizing:border-box;
-  font-family: 'Sora' sans-serif;
+  font-family: 'Sora', sans-serif;
 }
 
 
