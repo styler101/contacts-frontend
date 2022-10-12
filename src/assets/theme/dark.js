@@ -16,5 +16,7 @@ export default {
       main: '#5061fc',
       dark: '#3346f0',
     },
+
+
   },
 }

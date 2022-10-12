@@ -18,5 +18,6 @@ export default {
     },
 
     text: '1rem',
+    borderRadius: '4px'
   },
 }

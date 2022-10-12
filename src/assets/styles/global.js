@@ -10,12 +10,10 @@ export default createGlobalStyle`
   font-family: 'Sora', sans-serif;
 }
 
-
 body{
   background-color: ${({ theme }) => theme.colors.background};
   font-size: ${({ theme }) => theme.typography.text};
   }
-
 
   button{
     cursor:pointer;
@@ -23,11 +21,5 @@ body{
 
   a{
     text-decoration:none;
-
-
   }
-
-
-
-
 `

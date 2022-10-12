@@ -31,3 +31,72 @@ export const Header = styled.header`
     }
   }
 `
+
+export const ListContainer = styled.header`
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+
+  header{
+    width:100%;
+    .sort-button{
+      background:transparent;
+      border:none;
+      display:flex;
+      flex-direction:row;
+      align-items:center;
+      span{
+        font-weight:bold;
+        margin-right:1rem;
+        font-size:${(props) => props.theme.text};
+        color:${(props) => props.theme.colors.primary.main};
+        }
+
+      }
+  }
+
+`
+export const Card = styled.div`
+  width:100%;
+  margin: 1rem 0;
+  background:#fff;
+  box-shadow: 0 4px 10px rgba(0,0,0, 0.04);
+  padding:1rem;
+  border-radius:${(props) => props.theme.borderRadius};
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  .info{
+    .contact-name{
+      display:flex;
+      align-items:center;
+
+      small{
+        background: ${(props) => props.theme.colors.primary.lighter};
+        color: ${(props) => props.theme.colors.primary.main};
+        font-weight:bold;
+        text-transform:uppercase;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+        margin-left:0.5rem;
+      }
+    }
+    span{
+      display:block;
+      font-size:0.875rem;
+      color:${(props) => props.theme.colors.gray['200']}
+    }
+  }
+
+  .actions{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    button{
+      background:transparent;
+      border:none;
+      margin-left:0.825rem;
+
+    }
+  }
+`

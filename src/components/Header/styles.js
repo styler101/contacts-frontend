@@ -17,11 +17,12 @@ export const InputSearchContainer = styled.div`
     border-radius: 25px;
     background: #fff;
     border: none;
-    box-shadow: 1px 1px 2px #c8c8c8;
-
+    box-shadow: 1px 1px 2px ${(props) => props.theme.colors.border};
+    padding: 0 2rem;
+    color: ${(props) => props.theme.colors.gray['200']};
     &::placeholder {
-      padding: 0 1rem;
-      color: #bcbcbc;
+
+      color: ${(props) => props.theme.colors.gray['200']};
     }
   }
 `
