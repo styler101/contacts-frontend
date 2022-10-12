@@ -19,11 +19,11 @@ export const Header = styled.header`
 
   a {
     font-weight: bold;
+    cursor:pointer;
     color: ${(props) => props.theme.colors.primary.main};
     border: 2px solid ${(props) => props.theme.colors.primary.main};
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
-    cursor: pointer;
     &:hover {
       background-color: ${(props) => props.theme.colors.primary.dark};
       color: #fff;

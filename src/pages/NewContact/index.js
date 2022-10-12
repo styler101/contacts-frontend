@@ -1,11 +1,11 @@
 import React from 'react'
-import Header from '../../components/Header'
+import PageHeader from '../../components/PageHeader'
 
 
 const NewContact = () =>{
   return(
     <React.Fragment>
-      <Header/>
+      <PageHeader title={"Novo Contato"}/>
     </React.Fragment>
   )
 }

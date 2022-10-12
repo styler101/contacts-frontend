@@ -9,8 +9,8 @@ export default {
 
   typography: {
     heading: {
-      h1: '2rem',
-      h2: '1.813rem',
+      h1: '2rem',//32px
+      h2: '1.813rem', // 29px
       h3: '1.563rem',
       h4: '1.313rem',
       h5: '1.188rem',

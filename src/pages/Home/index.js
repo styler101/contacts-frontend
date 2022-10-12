@@ -1,5 +1,5 @@
 import React from 'react'
-import Header from '../../components/Header'
+import {Link} from 'react-router-dom'
 import arrow from '../../assets/img/svg/arrow.svg'
 import editIcon from '../../assets/img/svg/edit.svg'
 import trashIcon from '../../assets/img/svg/trash.svg'
@@ -10,14 +10,13 @@ const Home = () => {
   const [ search, setSearch] = React.useState('')
   return (
    <React.Fragment>
-    <Header/>
      <S.InputSearchContainer>
        <input type='text' placeholder='Pesquisar pelo nome'  value={search} onChange={(e) => setSearch((e.target.value))}/>
      </S.InputSearchContainer>
     <S.Container>
       <S.Header>
         <strong> 3 Contatos </strong>
-        <a href='#'> Novo Contato </a>
+        <Link to="/new"> Novo Contato </Link>
       </S.Header>
       <S.ListContainer>
         <header>
@@ -37,9 +36,9 @@ const Home = () => {
           <span> (31)919191-1919</span>
         </div>
         <div className="actions">
-          <a href="#">
+          <Link to="/edit/3">
             <img src={editIcon}  alt="edit icon"/>
-          </a>
+          </Link>
           <button>
             <img src={trashIcon} alt="trash icon"/>
           </button>
