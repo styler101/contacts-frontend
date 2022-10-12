@@ -3,6 +3,7 @@ import common from './common'
 export default {
   ...common,
   colors: {
+    white: '#fff',
     background: '#f6f5fc',
     border: '#c8c8c8',
     input: '#bcbcbc',
