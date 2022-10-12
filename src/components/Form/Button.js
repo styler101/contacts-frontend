@@ -1,8 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 
 export default styled.button`
- width:100%;
+  padding: 0 1rem;
   height: 2.813rem;
   font-weight:bold;
   border-radius: 4px;
@@ -26,5 +26,19 @@ export default styled.button`
     box-shadow: none;
     cursor:default;
   }
+
+  ${({theme, danger}) => danger && css`
+    color:${theme.colors.white};
+    background-color:${theme.colors.danger.main};
+
+    &:hover{
+      background:${theme.colors.danger.light};
+    }
+
+    &:active{
+      background:${theme.colors.danger.dark};
+    }
+
+  `}
 `
 
