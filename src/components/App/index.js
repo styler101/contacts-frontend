@@ -1,20 +1,21 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
+import Routes from '../../routes/index'
 import * as S from './styles'
-import Header from '../Header'
-import ContactsList from '../ContactsList'
 import GlobalStyles from '../../assets/styles/global'
 import themes from '../../assets/theme'
 
 function App() {
   return (
-    <ThemeProvider theme={themes.light}>
-      <S.Container>
-        <Header />
-        <ContactsList />
-      </S.Container>
-      <GlobalStyles />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={themes.light}>
+          <S.Container>
+            <Routes/>
+          </S.Container>
+          <GlobalStyles />
+      </ThemeProvider>
+      </BrowserRouter>
   )
 }
 

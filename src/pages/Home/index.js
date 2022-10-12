@@ -1,13 +1,19 @@
 import React from 'react'
-
+import Header from '../../components/Header'
 import arrow from '../../assets/img/svg/arrow.svg'
 import editIcon from '../../assets/img/svg/edit.svg'
 import trashIcon from '../../assets/img/svg/trash.svg'
 
 import * as S from './styles'
 
-const ContactsList = () => {
+const Home = () => {
+  const [ search, setSearch] = React.useState('')
   return (
+   <React.Fragment>
+    <Header/>
+     <S.InputSearchContainer>
+       <input type='text' placeholder='Pesquisar pelo nome'  value={search} onChange={(e) => setSearch((e.target.value))}/>
+     </S.InputSearchContainer>
     <S.Container>
       <S.Header>
         <strong> 3 Contatos </strong>
@@ -79,7 +85,8 @@ const ContactsList = () => {
 
       </S.Card>
     </S.Container>
+   </React.Fragment>
   )
 }
 
-export default ContactsList
+export default Home
