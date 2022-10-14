@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import arrow from '../../assets/img/svg/arrow.svg'
 import editIcon from '../../assets/img/svg/edit.svg'
 import trashIcon from '../../assets/img/svg/trash.svg'
-import Modal from '../../components/Modal'
+
 
 import * as S from './styles'
 
@@ -11,7 +11,7 @@ const Home = () => {
   const [ search, setSearch] = React.useState('')
   return (
    <React.Fragment>
-     <Modal danger/>
+
      <S.InputSearchContainer>
        <input type='text' placeholder='Pesquisar pelo nome'  value={search} onChange={(e) => setSearch((e.target.value))}/>
      </S.InputSearchContainer>

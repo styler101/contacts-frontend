@@ -6,6 +6,13 @@ export const Container = styled.div`
   & + div{
     margin-top:1rem;
   }
+
+  small{
+    color: ${(props) => props.theme.colors.danger.main};
+    margin-top: 0.5rem;
+    font-size:0.75rem;
+    display:block;
+  }
 `
 
 

@@ -13,6 +13,7 @@ export const Overlay = styled.div`
   flex-direction:column;
   align-items:center;
   justify-content: center;
+
 `
 export const Container = styled.div`
  width:100%;
