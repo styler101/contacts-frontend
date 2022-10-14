@@ -7,7 +7,8 @@ import Select from "../Form/Select";
 import Button from '../Form/Button'
 
 
-import { isEmailValid  } from '../../utils/Validators/index'
+import { isEmailValid } from '../../utils/Validators/index'
+import { formatPhone } from '../../utils/Formaters/index'
 import useErrors from '../../hooks/Errors/useErrors'
 import * as S from './styles'
 
@@ -41,22 +42,22 @@ const ContactForm = (props) =>{
    function handleEmailChange(event){
     setEmail(event.target.value)
     if(event.target.value && !isEmailValid(event.target.value)){
-      const findEmail = getErrorMessageByFieldName('email')
-      if(findEmail) return
       setError( { field: 'email', message: 'O Formato do email é invalido !' })
     }else{
      removeError({ field:'email'})
-
     }
-
    }
 
-  console.log(errors)
+   function handlePhoneNumber(event){
+    setPhone(formatPhone(event.target.value))
+   }
+
+
 
   return(
    <React.Fragment>
 
-    <S.Form onSubmit={handleSubmit}>
+    <S.Form onSubmit={handleSubmit} noValidate>
       <FormGroup  error={getErrorMessageByFieldName( 'name')} >
 
           <Input
@@ -70,6 +71,7 @@ const ContactForm = (props) =>{
 
         <FormGroup error={getErrorMessageByFieldName('email')} >
           <Input
+            type="email"
             placeholder="E-mail"
             error={getErrorMessageByFieldName( 'email')}
             value={email}
@@ -81,7 +83,8 @@ const ContactForm = (props) =>{
           <Input
             placeholder="Telefone"
             value={phone}
-            onChange={(event) => setPhone(event.target.value)}
+            onChange={handlePhoneNumber}
+            maxLenght="15"
           />
         </FormGroup>
 

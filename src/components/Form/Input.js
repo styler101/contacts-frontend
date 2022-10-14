@@ -12,6 +12,7 @@ export default styled.input`
   color: ${({theme}) => theme.colors.input};
   border: 2px solid transparent;
   transition: border-color 0.2s ease-in;
+  appearance: none ;
 
 
   &:focus{
