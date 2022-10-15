@@ -22,8 +22,8 @@ const ContactForm = (props) =>{
   const [email, setEmail] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [category, setCategory] = React.useState('')
-  const { setError, removeError, getErrorMessageByFieldName, errors } = useErrors()
-
+  const { errors, setError, removeError, getErrorMessageByFieldName  } = useErrors()
+  console.log('Errors', errors)
   function handleSubmit(event){
     event.preventDefault()
     console.log({
@@ -52,6 +52,8 @@ const ContactForm = (props) =>{
     setPhone(formatPhone(event.target.value))
    }
 
+   let isFormValid =  (name && errors.length === 0)
+
 
 
   return(
@@ -61,7 +63,7 @@ const ContactForm = (props) =>{
       <FormGroup  error={getErrorMessageByFieldName( 'name')} >
 
           <Input
-            placeholder="Nome"
+            placeholder="Nome *"
             error={getErrorMessageByFieldName( 'name')}
             value={name}
             onChange={handleNameChange}
@@ -98,7 +100,7 @@ const ContactForm = (props) =>{
           </Select>
 
           <S.ButtonContainer>
-          <Button type="submit" disabled={errors.length > 0}> {buttonLabel} </Button>
+          <Button type="submit" disabled={!isFormValid}> {buttonLabel} </Button>
           </S.ButtonContainer>
 
         </FormGroup>
