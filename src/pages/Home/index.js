@@ -7,6 +7,7 @@ import arrow from '../../assets/img/svg/arrow.svg'
 import editIcon from '../../assets/img/svg/edit.svg'
 import trashIcon from '../../assets/img/svg/trash.svg'
 
+import contactService from '../../services/contact/ContactService'
 import { formatPhone } from '../../utils/Formaters'
 
 import * as S from './styles'
@@ -24,19 +25,19 @@ const Home = () => {
   const [sort, setSort] = React.useState('ASC')
 
   React.useEffect(() => {
-    fetch(`http://localhost:3001/contacts?orderBy=${sort}`)
-      .then((response) => {
+    async function loadContacts() {
+      try {
         setLoading(true)
-        return response.json()
-      })
-      .then((payload) => {
-        setData(payload)
+        const response = await contactService.listContacts(sort)
+        setData(response)
+      } catch (error) {
+        console.log(error)
+      } finally {
         setLoading(false)
-      })
-      .catch((e) => {
-        console.log(e)
-        setLoading(false)
-      })
+      }
+    }
+
+    loadContacts()
   }, [sort])
 
   function handleOrderByName() {
