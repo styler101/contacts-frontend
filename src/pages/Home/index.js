@@ -28,8 +28,8 @@ const Home = () => {
     async function loadContacts() {
       try {
         setLoading(true)
-        const response = await contactService.listContacts(sort)
-        setData(response)
+        const contactList = await contactService.listContacts(sort)
+        setData(contactList)
       } catch (error) {
         console.log(error)
       } finally {
