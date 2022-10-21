@@ -31,7 +31,7 @@ const Home = () => {
         const contactList = await contactService.listContacts(sort)
         setData(contactList)
       } catch (error) {
-        console.log('Error', error)
+        console.log(error instanceof TypeError)
       } finally {
         setLoading(false)
       }
