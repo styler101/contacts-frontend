@@ -1,42 +1,55 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content: center;
+ margin-top:2rem;
 
-  header {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    img {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
-    div {
-      margin-left: 1.5rem;
-      h1 {
-        font-size: 1.375rem;
-        color: ${({ theme }) => theme.colors.danger.main};
-        width: 100%;
-        max-width: 23.375rem;
-      }
-
-      button {
-        margin-top: 0.5rem;
-        width: 11.313rem;
-        height: 2.625rem;
-        color: ${({ theme }) => theme.colors.white};
-        background-color: ${({ theme }) => theme.colors.primary.main};
-        font-weight: bold;
-        border: 0;
-        border-radius: 4px;
-        transition: background 0.5s ease-out;
-        &:hover {
-          background-color: ${({ theme }) => theme.colors.primary.dark};
-        }
-      }
+  button{
+    margin-bottom:1rem;
+    width:8.875rem;
+    height: 2.625rem;
+    background:transparent;
+    border:2px solid ${({theme}) => theme.colors.primary.main};
+    color: ${({theme}) => theme.colors.primary.main};
+    font-weight:600;
+    border-radius:4px;
+    transition: all 0.2s ease-out;
+    &:hover{
+      background:${({theme}) => theme.colors.primary.dark};
+      color:${({theme}) => theme.colors.white};
     }
   }
+  hr{
+    width:100%;
+  }
+
+  div{
+    margin-top:1rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: center;
+  }
 `
+
+
+export const Wrapper = styled.div`
+ width:402px;
+
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content: center;
+ text-align:center;
+ p{
+   color:${({theme}) => theme.colors.border};
+
+   strong{
+     color:${({theme}) => theme.colors.primary.dark};
+   }
+ }
+`
+

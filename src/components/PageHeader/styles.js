@@ -10,7 +10,7 @@ export const Container = styled.div`
    align-items:center;
 
    img{
-   transform: rotate(-90deg);
+   transform: rotate(0deg);
    }
 
     strong{

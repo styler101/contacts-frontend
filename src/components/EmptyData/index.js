@@ -1,29 +1,31 @@
-import React from 'react'
+import React from 'react';
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import icon from '../../assets/img/svg/sad.svg'
+import icon from '../../assets/img/svg/empty-box.svg'
 import * as S from './styles'
 
-export default function EmptyData(props) {
-  const { onLoadData } = props
-
+ function EmptyData(props){
+  const { link } = props;
+  const history = useHistory()
   return (
     <S.Container>
-      <hr />
-      <header>
-        <img src={icon} alt='sad face' />
+        <button onClick={() => history.push(`${link}`)}> Novo Contato </button>
+        <hr/>
         <div>
-          <h1> Ocorreu um erro ao obter os seus contatos! </h1>
-          <button onClick={onLoadData}> Tente Novamente!</button>
+          <img src={icon} alt="empty data"/>
+          <S.Wrapper>
+            <p> Você ainda não tem nenhum contato cadastrado!</p>
+            <p> Clique no botão <strong> {`"Novo Contato"`}</strong> a cima para cadastrar o seu primeiro!</p>
+          </S.Wrapper>
         </div>
-      </header>
     </S.Container>
   )
 }
 
 EmptyData.propTypes = {
-  onLoadData: PropTypes.func.isRequired,
+  link: PropTypes.string.isRequired
 }
 
-EmptyData.propTypes = {
-  onLoadData: () => {},
-}
+export default EmptyData;
+
+
