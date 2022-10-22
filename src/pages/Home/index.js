@@ -23,20 +23,21 @@ const Home = () => {
   const [loading, setLoading] = React.useState(true)
   const [data, setData] = React.useState([])
   const [sort, setSort] = React.useState('ASC')
+  const [hasError, setHasError] = React.useState(false)
+
+  async function loadContacts() {
+    try {
+      setLoading(true)
+      const contactList = await contactService.listContacts(sort)
+      setData(contactList)
+    } catch {
+      setHasError(true)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   React.useEffect(() => {
-    async function loadContacts() {
-      try {
-        setLoading(true)
-        const contactList = await contactService.listContacts(sort)
-        setData(contactList)
-      } catch (error) {
-        console.log(error instanceof TypeError)
-      } finally {
-        setLoading(false)
-      }
-    }
-
     loadContacts()
   }, [sort])
 
@@ -71,9 +72,12 @@ const Home = () => {
       <S.Container>
         <S.Header>
           <strong>
-            {' '}
-            {filteredContacts.length}{' '}
-            {filteredContacts.length === 1 ? 'Contato' : 'Contatos'}{' '}
+            {!hasError && (
+              <React.Fragment>
+                {filteredContacts.length}{' '}
+                {filteredContacts.length === 1 ? 'Contato' : 'Contatos'}{' '}
+              </React.Fragment>
+            )}
           </strong>
           <Link to='/new'> Novo Contato </Link>
         </S.Header>
@@ -94,7 +98,9 @@ const Home = () => {
           </header>
         </S.ListContainer>
 
-        {filteredContacts.length <= 0 && <EmptyData />}
+        {filteredContacts.length <= 0 && (
+          <EmptyData onLoadData={loadContacts} />
+        )}
         {filteredContacts.length > 0 &&
           filteredContacts.map((contact) => (
             <S.Card key={contact.id}>

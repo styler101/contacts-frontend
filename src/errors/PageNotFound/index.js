@@ -1,4 +1,5 @@
 import React from 'react'
+
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -8,6 +9,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 4rem;
+
   h1 {
     color: ${({ theme }) => theme.colors.danger.light};
     font-size: ${({ theme }) => theme.typography.heading.h2};
@@ -17,7 +19,9 @@ export const Container = styled.div`
 export default function PageNotFound() {
   return (
     <Container>
-      <h1> Página não encontrada! :(</h1>
+      <header>
+        <h1> Página não encontrada! :(</h1>
+      </header>
     </Container>
   )
 }

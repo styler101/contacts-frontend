@@ -1,5 +1,5 @@
 import { delay } from '../../utils/Time'
-
+import ApiError from '../../errors/ApiError'
 export default class HttpClient {
   constructor(baseUrl) {
     this.baseURL = baseUrl
@@ -19,8 +19,6 @@ export default class HttpClient {
     if (response.ok) {
       return body
     }
-    const defaultErrorMessage = `${response.status} - ${response.statusText}`
-
-    throw new Error(body?.error || defaultErrorMessage)
+    throw new ApiError(response, body)
   }
 }
