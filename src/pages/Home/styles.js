@@ -75,7 +75,7 @@ export const ListContainer = styled.header`
       }
 
       img {
-        transition: transform 0.2s ease-in;
+        transition: transform 0.5s ease-in;
       }
     }
   }
@@ -84,13 +84,14 @@ export const ListContainer = styled.header`
     if (props.direction === 'ASC') {
       return css`
         img {
-          transform: rotate(0deg);
+
+          transform: rotate(90deg);
         }
       `
     }
     return css`
       img {
-        transform: rotate(180deg);
+        transform: rotate(-90deg);
       }
     `
   }}

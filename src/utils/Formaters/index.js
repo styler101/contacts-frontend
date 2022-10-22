@@ -2,7 +2,6 @@ export function notEmptyStringOrDefault(value){
   return  typeof  value === 'string' ? value.trim() : ''
 }
 
-
 export function numberOrDefault(value){
   return typeof (value) === 'number' ? value : 0
 }

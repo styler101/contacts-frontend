@@ -5,6 +5,7 @@ import * as S from './styles'
 
 export default function EmptyData(props) {
   const { onLoadData } = props
+
   return (
     <S.Container>
       <hr />
