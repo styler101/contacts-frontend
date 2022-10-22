@@ -75,7 +75,7 @@ export const ListContainer = styled.header`
       }
 
       img {
-        transition: transform 0.5s ease-in;
+        transition: transform 0.1s ease-in;
       }
     }
   }

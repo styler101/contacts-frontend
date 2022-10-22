@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Link } from 'react-router-dom'
 
 import Loader from '../../components/Loader'
@@ -25,7 +25,7 @@ const Home = () => {
   const [sort, setSort] = React.useState('ASC')
   const [hasError, setHasError] = React.useState(false)
 
-  async function loadContacts() {
+  const loadContacts = useCallback(async() =>{
     try {
       setLoading(true)
       const contactList = await contactService.listContacts(sort)
@@ -35,11 +35,12 @@ const Home = () => {
     } finally {
       setLoading(false)
     }
-  }
+  },[sort])
+
 
   React.useEffect(() => {
     loadContacts()
-  }, [sort])
+  }, [loadContacts])
 
   function handleOrderByName() {
     setSort((prevState) => (prevState === 'ASC' ? 'DESC' : 'ASC'))
