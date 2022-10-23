@@ -5,8 +5,8 @@ import FormGroup from "../FormGroup";
 import Input from "../Form/Input";
 import Select from "../Form/Select";
 import Button from '../Form/Button'
-import Loader from '../Loader'
-import RequestError  from "../RequestError";
+
+
 import categoriesServices from '../../services/categories'
 
 import { isEmailValid } from '../../utils/Validators/index'
@@ -19,13 +19,13 @@ import * as S from './styles'
 const ContactForm = (props) =>{
 
   const { buttonLabel } = props
-  const [loading, setLoading] = React.useState(true)
+
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [phone, setPhone] = React.useState('');
   const [selectedCategory, setSelectedCategory] = React.useState('')
   const [categories, setCategories] = React.useState([])
-  const [hasErrors, setHasErrors] = React.useState(false)
+  const [isLoadingCategories, setIsLoadingCategories] = React.useState(true)
   const { errors, setError, removeError, getErrorMessageByFieldName  } = useErrors()
 
   function handleSubmit(event){
@@ -59,26 +59,24 @@ const ContactForm = (props) =>{
    let isFormValid =  (name && errors.length === 0)
 
   const loadContacts = useCallback(async() =>{
-    setLoading(true)
+    setIsLoadingCategories(true)
     try{
       const response = await categoriesServices.getAllCategories();
       setCategories(response)
-    }catch(error){
-      setHasErrors(true)
+    }catch{
+      setCategories([])
     }finally {
-      setLoading(false)
+     setIsLoadingCategories(false)
     }
       },[])
 
   useEffect(() =>{
     loadContacts()
-  },[])
+  },[loadContacts])
 
 
   return(
    <React.Fragment>
-     <Loader loading={loading}/>
-     {hasErrors ? <RequestError onLoadData={loadContacts}/> : (
 
     <S.Form onSubmit={handleSubmit} noValidate>
       <FormGroup  error={getErrorMessageByFieldName( 'name')} >
@@ -111,23 +109,25 @@ const ContactForm = (props) =>{
           />
         </FormGroup>
 
-        <FormGroup>
+        <FormGroup isLoading={isLoadingCategories}>
           <Select
             value={selectedCategory}
-            onChange={(event) => setSelectedCategory((event.target.value))}>
+            onChange={(event) => setSelectedCategory((event.target.value))}
+            disabled={isLoadingCategories}
+          >
             <option  value={""}> Sem Categoria </option>
             {categories.map((category) =>(
               <option key={category.id} value={category.id}> {category.name}</option>
             ))}
           </Select>
-
-          <S.ButtonContainer>
-          <Button type="submit" disabled={!isFormValid}> {buttonLabel} </Button>
-          </S.ButtonContainer>
-
         </FormGroup>
+
+        <S.ButtonContainer>
+          <Button type="submit" disabled={!isFormValid}> {buttonLabel} </Button>
+        </S.ButtonContainer>
+
     </S.Form>
-       )}
+
    </React.Fragment>
   )
 

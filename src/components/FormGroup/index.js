@@ -4,11 +4,14 @@ import * as S from  './styles'
 
 
 const FormGroup = (props) =>{
-  const { children, error } = props
+  const { children, error, isLoading } = props
 
   return(
     <S.Container>
-      {children}
+      <div className="form-item">
+        {children}
+        {isLoading && <div className="loader"> </div>}
+      </div>
       {error && <small> {error}</small>}
     </S.Container>
   )
@@ -17,11 +20,13 @@ const FormGroup = (props) =>{
 FormGroup.propTypes = {
   children: PropTypes.node.isRequired,
   error: PropTypes.string,
+  isLoading: PropTypes.bool,
 
 }
 
 FormGroup.defaultProps ={
-  error:''
+  error:'',
+  isLoading: false,
 }
 
 
