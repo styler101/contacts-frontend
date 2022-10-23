@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useCallback, useEffect} from 'react';
 import PropTypes from 'prop-types'
 
 import FormGroup from "../FormGroup";
 import Input from "../Form/Input";
 import Select from "../Form/Select";
 import Button from '../Form/Button'
-
+import Loader from '../Loader'
+import RequestError  from "../RequestError";
+import categoriesServices from '../../services/categories'
 
 import { isEmailValid } from '../../utils/Validators/index'
 import { formatPhone } from '../../utils/Formaters/index'
@@ -17,20 +19,22 @@ import * as S from './styles'
 const ContactForm = (props) =>{
 
   const { buttonLabel } = props
-
+  const [loading, setLoading] = React.useState(true)
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [phone, setPhone] = React.useState('');
-  const [category, setCategory] = React.useState('')
+  const [selectedCategory, setSelectedCategory] = React.useState('')
+  const [categories, setCategories] = React.useState([])
+  const [hasErrors, setHasErrors] = React.useState(false)
   const { errors, setError, removeError, getErrorMessageByFieldName  } = useErrors()
-  console.log('Errors', errors)
+
   function handleSubmit(event){
     event.preventDefault()
     console.log({
       name,
       email,
       phone,
-      category
+      selectedCategory
     })
   }
 
@@ -54,10 +58,27 @@ const ContactForm = (props) =>{
 
    let isFormValid =  (name && errors.length === 0)
 
+  const loadContacts = useCallback(async() =>{
+    setLoading(true)
+    try{
+      const response = await categoriesServices.getAllCategories();
+      setCategories(response)
+    }catch(error){
+      setHasErrors(true)
+    }finally {
+      setLoading(false)
+    }
+      },[])
+
+  useEffect(() =>{
+    loadContacts()
+  },[])
 
 
   return(
    <React.Fragment>
+     <Loader loading={loading}/>
+     {hasErrors ? <RequestError onLoadData={loadContacts}/> : (
 
     <S.Form onSubmit={handleSubmit} noValidate>
       <FormGroup  error={getErrorMessageByFieldName( 'name')} >
@@ -92,11 +113,12 @@ const ContactForm = (props) =>{
 
         <FormGroup>
           <Select
-            value={category}
-            onChange={(event) => setCategory((event.target.value))}>
-            <option value="instagram"> Instagram </option>
-            <option value="linkedin"> Linkedin </option>
-            <option value="Site"> Site </option>
+            value={selectedCategory}
+            onChange={(event) => setSelectedCategory((event.target.value))}>
+            <option  value={""}> Sem Categoria </option>
+            {categories.map((category) =>(
+              <option key={category.id} value={category.id}> {category.name}</option>
+            ))}
           </Select>
 
           <S.ButtonContainer>
@@ -105,6 +127,7 @@ const ContactForm = (props) =>{
 
         </FormGroup>
     </S.Form>
+       )}
    </React.Fragment>
   )
 
