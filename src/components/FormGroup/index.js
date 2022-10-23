@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Spinner from '../Spinner'
 import * as S from  './styles'
 
 
@@ -10,7 +11,7 @@ const FormGroup = (props) =>{
     <S.Container>
       <div className="form-item">
         {children}
-        {isLoading && <div className="loader"> </div>}
+        {isLoading && <Spinner/>}
       </div>
       {error && <small> {error}</small>}
     </S.Container>

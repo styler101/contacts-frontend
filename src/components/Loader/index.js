@@ -13,10 +13,10 @@ const Loading = (props) =>{
     <React.Fragment></React.Fragment> : ReactDOM.createPortal(
     (
       <S.Overlay>
-        <S.Container>
-          <div className="spinner"></div>
-          <span> Carregando... </span>
-        </S.Container>
+        <S.StyleSpinner>
+          <S.CustomSpinner/>
+        </S.StyleSpinner>
+
       </S.Overlay>
 
     ), document.getElementById("loading-root")
