@@ -6,7 +6,7 @@ import Loader from '../../components/Loader'
 import arrow from '../../assets/img/svg/arrow.svg'
 import editIcon from '../../assets/img/svg/edit.svg'
 import trashIcon from '../../assets/img/svg/trash.svg'
-
+import searchIcon from '../../assets/img/svg/magnifier-question.svg'
 import contactService from '../../services/contact/ContactService'
 import { formatPhone } from '../../utils/Formaters'
 
@@ -30,8 +30,7 @@ const Home = () => {
   const loadContacts = useCallback(async () => {
     try {
       setLoading(true)
-      const contactList = []
-      await contactService.listContacts(sort)
+      const contactList = await contactService.listContacts(sort)
       setData(contactList)
     } catch {
       setHasError(true)
@@ -62,84 +61,90 @@ const Home = () => {
 
   return (
     <React.Fragment>
-      {data.length <= 0 ?  (<EmptyData link={'/new'}/>)
-        : (
-          <React.Fragment>
-            <Loader loading={loading} />
-            <S.InputSearchContainer>
-              <input
-                type='text'
-                placeholder='Pesquisar pelo nome'
-                value={searchTerm}
-                onChange={handleSearch}
-              />
-            </S.InputSearchContainer>
+      { hasError ? ( <RequestError onLoadData={loadContacts}/>): (
+        <React.Fragment>
 
-            <S.Container>
+        {data.length <= 0 ?  (<EmptyData link={'/new'}/>)
+          : (
+            <React.Fragment>
+              <Loader loading={loading} />
+              <S.InputSearchContainer>
+                <input
+                  type='text'
+                  placeholder='Pesquisar pelo nome'
+                  value={searchTerm}
+                  onChange={handleSearch}
+                />
+              </S.InputSearchContainer>
 
-              <React.Fragment>
-                <S.Header>
-                  <strong>
-                    {!hasError && (
-                      <React.Fragment>
-                        {filteredContacts.length}{' '}
-                        {filteredContacts.length === 1 ? 'Contato' : 'Contatos'}{' '}
-                      </React.Fragment>
-                    )}
-                  </strong>
-                  <Link to='/new'> Novo Contato </Link>
-                </S.Header>
+              <S.Container>
 
-                <S.ListContainer direction={sort}>
-                  <header>
-                    {filteredContacts.length > 0 && (
-                      <button
-                        type='button'
-                        className='sort-button'
-                        disabled={data.length <= 0}
-                        onClick={handleOrderByName}
-                      >
-                        <span> Nome </span>
-                        <img src={arrow} alt={'Arrow icon'} />
-                      </button>
-                    )}
-                  </header>
-                </S.ListContainer>
+                <React.Fragment>
+                  <S.Header>
+                    <strong>
+                      {!hasError && (
+                        <React.Fragment>
+                          {filteredContacts.length}{' '}
+                          {filteredContacts.length === 1 ? 'Contato' : 'Contatos'}{' '}
+                        </React.Fragment>
+                      )}
+                    </strong>
+                    <Link to='/new'> Novo Contato </Link>
+                  </S.Header>
 
-                {filteredContacts.length <= 0 && (
-                  <RequestError onLoadData={loadContacts} />
-                )}
-                {filteredContacts.length > 0 &&
-                  filteredContacts.map((contact) => (
-                    <S.Card key={contact.id}>
-                      <div className='info'>
-                        <div className='contact-name'>
-                          <strong> {contact.name} </strong>
-                          {contact?.category_name && (
-                            <small className='category'>
-                              {' '}
-                              {contact.category_name}{' '}
-                            </small>
-                          )}
-                        </div>
-                        <span> {contact.email} </span>
-                        <span> {formatPhone(contact.phone)}</span>
-                      </div>
-                      <div className='actions'>
-                        <Link to={`/edit/${contact.id}`}>
-                          <img src={editIcon} alt='edit icon' />
-                        </Link>
-                        <button>
-                          <img src={trashIcon} alt='trash icon' />
+                  <S.ListContainer direction={sort}>
+                    <header>
+                      {filteredContacts.length > 0 && (
+                        <button
+                          type='button'
+                          className='sort-button'
+                          disabled={data.length <= 0}
+                          onClick={handleOrderByName}
+                        >
+                          <span> Nome </span>
+                          <img src={arrow} alt={'Arrow icon'} />
                         </button>
-                      </div>
-                    </S.Card>
-                  ))}
-              </React.Fragment>
-            </S.Container>
-          </React.Fragment>
+                      )}
+                    </header>
+                  </S.ListContainer>
+                  { (data.length > 0  && filteredContacts < 1) && (
+                    <S.SearchNotFound>
+                      <img src={searchIcon} alt="search icon"/>
+                      <span> Nenhum resultado foi encontrado para <strong>{`"${searchTerm}"`}</strong></span>
+                    </S.SearchNotFound>
+                  )}
+                  {filteredContacts.length > 0 &&
+                    filteredContacts.map((contact) => (
+                      <S.Card key={contact.id}>
+                        <div className='info'>
+                          <div className='contact-name'>
+                            <strong> {contact.name} </strong>
+                            {contact?.category_name && (
+                              <small className='category'>
+                                {' '}
+                                {contact.category_name}{' '}
+                              </small>
+                            )}
+                          </div>
+                          <span> {contact.email} </span>
+                          <span> {formatPhone(contact.phone)}</span>
+                        </div>
+                        <div className='actions'>
+                          <Link to={`/edit/${contact.id}`}>
+                            <img src={editIcon} alt='edit icon' />
+                          </Link>
+                          <button>
+                            <img src={trashIcon} alt='trash icon' />
+                          </button>
+                        </div>
+                      </S.Card>
+                    ))}
+                </React.Fragment>
+              </S.Container>
+            </React.Fragment>
       ) }
-
+          </React.Fragment>
+      )}
     </React.Fragment>
   )
 }

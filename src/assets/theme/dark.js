@@ -9,7 +9,9 @@ export default {
     border: '#c8c8c8',
     input: '#bcbcbc',
     gray: {
-      dark: '#222',
+      '900': '#222',
+      '200': '#bcbcbc'
+
     },
 
     primary: {

@@ -140,3 +140,20 @@ export const Card = styled.div`
     }
   }
 `
+
+export const SearchNotFound = styled.div`
+  margin-top:1rem;
+  display:flex;
+  align-items:flex-start;
+  justify-content: center;
+  span{
+    margin-left: 1.5rem;
+    color:${({theme}) => theme.colors.gray['200']};
+    word-break: break-word;
+    strong{
+      max-width:240px;
+
+    }
+
+  }
+`
