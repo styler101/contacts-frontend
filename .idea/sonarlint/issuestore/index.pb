@@ -13,7 +13,5 @@ L
 src/index.js,f/9/f900edc44cb929c2267a16100a32851f6d5b477d
 >
 .eslintrc.json,7/1/71c20a341bfe32aa5cd5b4384e94f942bab6a7d3
-P
- src/services/utils/HttpClient.js,2/0/2083674cf7b2ae7c81541f78e0bddfeb7831eab6
 J
 src/assets/theme/common.js,5/1/51280cae2d5de242b4aaa78ebca4b25989c43f17

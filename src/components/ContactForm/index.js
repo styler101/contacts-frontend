@@ -6,19 +6,20 @@ import Input from "../Form/Input";
 import Select from "../Form/Select";
 import Button from '../Form/Button'
 
+import categoriesService from '../../services/categories'
 
-import categoriesServices from '../../services/categories'
 
 import { isEmailValid } from '../../utils/Validators/index'
 import { formatPhone } from '../../utils/Formaters/index'
 import useErrors from '../../hooks/Errors/useErrors'
 import * as S from './styles'
 
+
 // ControllerComponent -> São componentes que podem ser controlados pelo react
 // UncontrolledComponent  -> os componentes de input passam as ser gerenciados pela DOM
 const ContactForm = (props) =>{
 
-  const { buttonLabel } = props
+  const { buttonLabel, onSumbit } = props;
 
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
@@ -28,14 +29,16 @@ const ContactForm = (props) =>{
   const [isLoadingCategories, setIsLoadingCategories] = React.useState(true)
   const { errors, setError, removeError, getErrorMessageByFieldName  } = useErrors()
 
-  function handleSubmit(event){
-    event.preventDefault()
-    console.log({
+  async function handleSubmit(event){
+    event.preventDefault();
+    const payload = {
       name,
       email,
       phone,
-      selectedCategory
-    })
+      category_id: selectedCategory
+    }
+    onSumbit(payload)
+
   }
 
   function handleNameChange(event){
@@ -61,7 +64,7 @@ const ContactForm = (props) =>{
   const loadContacts = useCallback(async() =>{
     setIsLoadingCategories(true)
     try{
-      const response = await categoriesServices.getAllCategories();
+      const response = await categoriesService.getAllCategories();
       setCategories(response)
     }catch{
       setCategories([])
@@ -135,7 +138,15 @@ const ContactForm = (props) =>{
 
 
 ContactForm.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
+  buttonLabel: PropTypes.string.isRequired,
+  onSumbit: PropTypes.func.isRequired
 }
+
+
+ContactForm.defaultProps = {
+  buttonLabel: '',
+  onSumbit: () => {}
+}
+
 
 export default ContactForm;
