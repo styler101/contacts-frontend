@@ -1,49 +1,68 @@
 import { delay } from '../../utils/Time'
 import ApiError from '../../errors/ApiError'
+
 export default class HttpClient {
   constructor(baseUrl) {
     this.baseURL = baseUrl
+
   }
 
-  async get(path) {
-    await delay(1000)
-    const response = await fetch(`${this.baseURL}${path}`)
-    // O ok contém o valor boolean que diz o o nosso status está no range esperado.
-    let body = null
-    const contentType = response.headers.get('Content-Type')
-
-    if (contentType.includes('application/json')) {
-      body = await response.json()
-    }
-
-    if (response.ok) {
-      return body
-    }
-    throw new ApiError(response, body)
-  }
-
-  async post(path, payload){
-    const headers = new Headers({
-      'Content-type': 'application/json'
+  get(path, options) {
+    return this.makeRequest(path, {
+      method: 'GET',
+      headers:options?.headers
     })
-    await delay(3000);
-    const response = await fetch(`${this.baseURL}${path}`, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      headers,
-      }
-    );
+  }
 
-    let body = null;
+   post(path, options ){
+
+   return this.makeRequest(path,
+     {
+       method: 'POST',
+       body: options?.body ,
+       headers: options?.headers
+     })
+  }
+
+   put(path, payload){
+
+     return this.makeRequest(path, { method: 'PUT', body: payload })
+   }
+
+  async makeRequest(path, options ={}){
+    await delay(500);
+    const headers = new Headers();
+
+    if(options.body){
+      headers.append('Content-Type', 'application/json')
+    }
+
+    if(options.headers){
+      // 1 - Form a de criar
+      // Object.keys(options.headers).forEach((headerName) =>  headers.append(headerName, options.headers[headerName]))
+      // 2 Maneira de criar a forma de abstrair os headers.
+      Object
+        .entries(options.headers)
+        .forEach(([key, value]) => headers.append(key, value))
+    }
+
+    const response = await fetch(`${this.baseURL}${path}`, {
+      method: options.method,
+      body: JSON.stringify(options.body),
+      headers
+    })
+
+    let responseBody = null;
     const contentType = response.headers.get('Content-Type');
     if(contentType.includes('application/json')){
-      body = await response.json();
+      responseBody = await response.json()
     }
 
     if(response.ok){
-      return body;
+      return responseBody
     }
-    throw new ApiError(response, body)
+
+    throw new ApiError(response, responseBody)
 
   }
 }
