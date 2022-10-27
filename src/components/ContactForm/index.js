@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import FormGroup from "../FormGroup";
 import Input from "../Form/Input";
 import Select from "../Form/Select";
-import Button from '../Form/Button'
+import Button from '../Form/Button/index'
 
 import categoriesService from '../../services/categories'
 
@@ -13,6 +13,7 @@ import { isEmailValid } from '../../utils/Validators/index'
 import { formatPhone } from '../../utils/Formaters/index'
 import useErrors from '../../hooks/Errors/useErrors'
 import * as S from './styles'
+
 
 
 // ControllerComponent -> São componentes que podem ser controlados pelo react
@@ -27,17 +28,35 @@ const ContactForm = (props) =>{
   const [selectedCategory, setSelectedCategory] = React.useState('')
   const [categories, setCategories] = React.useState([])
   const [isLoadingCategories, setIsLoadingCategories] = React.useState(true)
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
   const { errors, setError, removeError, getErrorMessageByFieldName  } = useErrors()
+
 
   async function handleSubmit(event){
     event.preventDefault();
-    const payload = {
-      name,
-      email,
-      phone,
-      category_id: selectedCategory
+    setTimeout(() =>{
+
+      setIsSubmitting(true)
+    },5000)
+    try{
+      const payload = {
+        name,
+        email,
+        phone,
+        category_id: selectedCategory
+      }
+      await onSumbit(payload)
+      setName("");
+      setEmail("");
+      setPhone("");
+      setSelectedCategory("");
+
+    }catch{
+        alert('Error')
+    }finally {
+      setIsSubmitting(false)
     }
-    onSumbit(payload)
+
 
   }
 
@@ -89,6 +108,7 @@ const ContactForm = (props) =>{
             error={getErrorMessageByFieldName( 'name')}
             value={name}
             onChange={handleNameChange}
+            disabled={isSubmitting}
           />
 
         </FormGroup>
@@ -100,6 +120,7 @@ const ContactForm = (props) =>{
             error={getErrorMessageByFieldName( 'email')}
             value={email}
             onChange={handleEmailChange}
+            disabled={isSubmitting}
           />
         </FormGroup>
 
@@ -109,6 +130,7 @@ const ContactForm = (props) =>{
             value={phone}
             onChange={handlePhoneNumber}
             maxLenght="15"
+            disabled={isSubmitting}
           />
         </FormGroup>
 
@@ -116,7 +138,7 @@ const ContactForm = (props) =>{
           <Select
             value={selectedCategory}
             onChange={(event) => setSelectedCategory((event.target.value))}
-            disabled={isLoadingCategories}
+            disabled={isLoadingCategories || isSubmitting}
           >
             <option  value={""}> Sem Categoria </option>
             {categories.map((category) =>(
@@ -126,7 +148,9 @@ const ContactForm = (props) =>{
         </FormGroup>
 
         <S.ButtonContainer>
-          <Button type="submit" disabled={!isFormValid}> {buttonLabel} </Button>
+            <Button isLoading={isSubmitting} disabled={!isFormValid|| isSubmitting} type="submit">
+              {buttonLabel}
+            </Button>
         </S.ButtonContainer>
 
     </S.Form>

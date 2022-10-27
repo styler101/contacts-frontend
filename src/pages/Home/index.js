@@ -27,6 +27,7 @@ const Home = () => {
   const [sort, setSort] = React.useState('ASC')
   const [hasError, setHasError] = React.useState(false)
 
+
   const loadContacts = useCallback(async () => {
     try {
       setLoading(true)

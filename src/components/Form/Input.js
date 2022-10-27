@@ -30,6 +30,10 @@ export default styled.input`
 
   `}
 
+  &[disabled]{
+    background-color:${({theme}) => theme.colors.gray[100]};
+  }
+
 `
 
 

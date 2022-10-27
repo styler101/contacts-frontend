@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 
-export default styled.button`
+export const Container = styled.button`
   padding: 0 1rem;
   height: 2.813rem;
   font-weight:bold;
@@ -12,7 +12,10 @@ export default styled.button`
   cursor:pointer;
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
   transition: background 0.2s ease-in;
-
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content: center;
   &:hover{
     background:${(props) => props.theme.colors.primary.light};
   }

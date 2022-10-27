@@ -36,7 +36,6 @@ export default class HttpClient {
     if(options.body){
       headers.append('Content-Type', 'application/json')
     }
-
     if(options.headers){
       // 1 - Form a de criar
       // Object.keys(options.headers).forEach((headerName) =>  headers.append(headerName, options.headers[headerName]))
