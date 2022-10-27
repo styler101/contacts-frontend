@@ -32,8 +32,6 @@ I
 src/assets/theme/light.js,1/3/13eb43629c766ac11a6c3665c6d98f0dd5058976
 P
  src/services/categories/index.js,c/4/c49d5fd421049f3dfe1565513f1d11b342b60bda
-K
-src/assets/styles/global.js,b/2/b247f7eafb7ec3cb2b4dee8b361e9a55c010f445
 H
 src/assets/theme/dark.js,f/e/feee6bd3854089409a14ea6a15116a3ec14e3432
 N
@@ -44,10 +42,6 @@ O
 src/components/Loader/styles.js,7/0/7061c432ec9b4ee0fa5ff7bf96280d834d7e229b
 S
 #.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
-V
-&src/services/contact/ContactService.js,b/1/b11b06226a1c5ddb93f1e34f60d59a3b5b91841f
-P
- src/services/utils/HttpClient.js,2/0/2083674cf7b2ae7c81541f78e0bddfeb7831eab6
 H
 src/pages/Home/styles.js,b/6/b696a5af331eb6c2698f6254f55f162eec904d46
 M
