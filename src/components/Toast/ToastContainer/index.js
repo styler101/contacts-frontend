@@ -1,10 +1,13 @@
 import React from 'react';
+import ToastMessage from '../ToastMessage'
 import * as S from './styles'
 
 export default function ToastContainer(){
   return(
     <S.ToastContainer>
-      <h1> Toast Container </h1>
+      <ToastMessage text="Default Toast" type="default"/>
+      <ToastMessage text="Error Toast" type="error"/>
+      <ToastMessage text="Sucess  toast" type="success"/>
     </S.ToastContainer>
   )
 }
