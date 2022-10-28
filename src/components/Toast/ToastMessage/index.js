@@ -7,9 +7,9 @@ import * as S from './styles'
 export default function ToastMessage(props){
   const { text, type } = props
   console.log(type);
-  return <S.Container>
+  return <S.Container type={type}>
     {type === 'success' && <Icon/>}
-    {type === 'error' && <Icon2/>}
+    {type === 'danger' && <Icon2/>}
     <strong>{ text} </strong>
   </S.Container>
 }

@@ -1,9 +1,15 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 
+const containerVariants  = {
+  default: css ` background: ${({theme}) => theme.colors.primary.dark}`,
+  success: css `background: ${({theme}) => theme.colors.success.main}`,
+  danger: css ` background:${({theme}) => theme.colors.danger.dark}`
+
+}
 export const Container = styled.div`
  padding: 1rem  2rem;
- background:${({theme}) => theme.colors.primary.main};
+
  color:#fff;
  border-radius: 4px;
  box-shadow: 0 20px 20px -16px rgba(0, 0, 0, 0.25);
@@ -17,4 +23,6 @@ export const Container = styled.div`
   & + div{
     margin-top: 12px;
   }
+  ${({ type }) => containerVariants[type] || containerVariants['default']}
+
 `
