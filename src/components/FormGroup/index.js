@@ -11,7 +11,7 @@ const FormGroup = (props) =>{
     <S.Container>
       <div className="form-item">
         {children}
-        {isLoading && <Spinner/>}
+        {isLoading && <Spinner width={16} height={16}/>}
       </div>
       {error && <small> {error}</small>}
     </S.Container>

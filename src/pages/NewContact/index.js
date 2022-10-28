@@ -7,8 +7,7 @@ const NewContact = () =>{
 
   async function handleSubmit(payload){
   try{
-    const response = await contactsService.createContact( { body: payload })
-    console.log(response);
+     await contactsService.createContact( { body: payload })
   }catch{
     throw new ApiError('Erro ao cadastrar o contato')
   }

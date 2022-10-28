@@ -10,7 +10,7 @@ export default function Button(props){
     <S.Container
       disabled={disabled  || isLoading}
       type={type}>
-      {isLoading ? <Spinner width={'16px'} height={'16px'}/> : children}
+      {isLoading ? <Spinner width={16} height={16}/> : children}
     </S.Container>
   )
 }

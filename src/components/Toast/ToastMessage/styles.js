@@ -2,7 +2,10 @@ import styled, { css } from 'styled-components'
 
 
 const containerVariants  = {
-  default: css ` background: ${({theme}) => theme.colors.primary.dark}`,
+  default: css `
+    background: ${({theme}) => theme.colors.primary.main};
+    margin-left: 0;
+  `,
   success: css `background: ${({theme}) => theme.colors.success.main}`,
   danger: css ` background:${({theme}) => theme.colors.danger.dark}`
 

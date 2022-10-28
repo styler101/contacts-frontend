@@ -11,6 +11,7 @@ import categoriesService from '../../services/categories'
 
 import { isEmailValid } from '../../utils/Validators/index'
 import { formatPhone } from '../../utils/Formaters/index'
+import { addToast } from '../../utils/Toast'
 import useErrors from '../../hooks/Errors/useErrors'
 import * as S from './styles'
 
@@ -34,10 +35,8 @@ const ContactForm = (props) =>{
 
   async function handleSubmit(event){
     event.preventDefault();
-    setTimeout(() =>{
+    setIsSubmitting(true)
 
-      setIsSubmitting(true)
-    },5000)
     try{
       const payload = {
         name,
@@ -45,16 +44,21 @@ const ContactForm = (props) =>{
         phone,
         category_id: selectedCategory
       }
-      await onSumbit(payload)
+     await onSumbit(payload)
       setName("");
       setEmail("");
       setPhone("");
       setSelectedCategory("");
+      addToast({ text: 'Contato cadastrado com sucesso!', type: 'success'})
 
     }catch{
-        alert('Error')
+      // Podemos usar o Custom event também sem parametros por exemplos se quisermos limpar todas a informações salvas no storaged
+      // const removeStoragedAfterLogOut =  new CustomEvent('removestoragedafterlogout´) os custom event são case sensitive a forma como a palavra foi escrita faz diferença
+      addToast({ text: 'Erro ao cadastrar o contato', type: 'danger'})
+
     }finally {
-      setIsSubmitting(false)
+       setIsSubmitting(false)
+
     }
 
 
