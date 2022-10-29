@@ -8,21 +8,18 @@ import GlobalStyles from '../../assets/styles/global'
 import ToastContainer from '../Toast/ToastContainer'
 import themes from '../../assets/theme'
 
-
 function App() {
   return (
     <BrowserRouter>
       <ThemeProvider theme={themes.light}>
-          <S.Container>
-            <Header/>
-            <Routes/>
-            <ToastContainer/>
-          </S.Container>
-          <GlobalStyles />
-
+        <S.Container>
+          <Header />
+          <Routes />
+          <ToastContainer />
+        </S.Container>
+        <GlobalStyles />
       </ThemeProvider>
-
-      </BrowserRouter>
+    </BrowserRouter>
   )
 }
 
