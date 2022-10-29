@@ -1,4 +1,4 @@
-export default class EventManager{
+class EventManager{
 
   constructor() {
     this.listeners = new Map();
@@ -28,3 +28,4 @@ export default class EventManager{
   }
 }
 
+export default EventManager;
