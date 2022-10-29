@@ -6,8 +6,13 @@ const containerVariants  = {
     background: ${({theme}) => theme.colors.primary.main};
     margin-left: 0;
   `,
-  success: css `background: ${({theme}) => theme.colors.success.main}`,
-  danger: css ` background:${({theme}) => theme.colors.danger.dark}`
+  success: css `
+    background: ${({theme}) => theme.colors.success.main}
+  `,
+
+  danger: css `
+    background:${({theme}) => theme.colors.danger.dark}
+  `
 
 }
 export const Container = styled.div`

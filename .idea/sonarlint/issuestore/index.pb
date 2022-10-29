@@ -46,8 +46,6 @@ T
 $src/components/Form/Button/styles.js,9/6/96bdd6e25cd2afa9a65b1e63cc9136d401ed17e6
 P
  src/services/utils/HttpClient.js,2/0/2083674cf7b2ae7c81541f78e0bddfeb7831eab6
-K
-src/components/App/index.js,7/3/73c53abe0743d7f8b19d5c6990f23f35ed252351
 L
 src/components/App/styles.js,7/e/7e1c63c7515e56bda99423e28de8b4dbc3ed4979
 K

@@ -6,7 +6,6 @@ import * as S from './styles'
 export default function ToastContainer(){
   const [messages, setMessages] = useState([])
 
-  console.log('Renderizou');
 
   useEffect(() => {
       function handleAddToast(event){

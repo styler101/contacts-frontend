@@ -7,6 +7,7 @@ import * as S from './styles'
 import GlobalStyles from '../../assets/styles/global'
 import ToastContainer from '../Toast/ToastContainer'
 import themes from '../../assets/theme'
+import '../../lib/EventManager'
 
 function App() {
   return (
