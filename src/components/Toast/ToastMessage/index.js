@@ -13,7 +13,12 @@ export default function ToastMessage(props) {
   const { type, id, text } = message
 
   return (
-    <S.Container type={type} onClick={() => onRemoveMessage(id)}>
+    <S.Container
+      type={type}
+      onClick={() => onRemoveMessage(id)}
+      tabIndex={0}
+      role='button'
+    >
       {type === 'success' && <Icon />}
       {type === 'danger' && <Icon2 />}
       <strong>{text} </strong>
@@ -22,7 +27,7 @@ export default function ToastMessage(props) {
 }
 
 ToastMessage.propsTypes = {
-  message: PropTypes.object({
+  message: PropTypes.shape({
     id: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['default', 'success', 'danger']),

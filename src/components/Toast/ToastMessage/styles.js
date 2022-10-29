@@ -29,5 +29,6 @@ export const Container = styled.div`
   & + div {
     margin-top: 12px;
   }
+
   ${({ type }) => containerVariants[type] || containerVariants['default']}
 `
