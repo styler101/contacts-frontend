@@ -16,20 +16,30 @@ export default class EventManager{
     this.listeners[eventName].forEach((listerners) => {
       listerners(eventPayload)
     })
-
   }
 
+  removeListener(eventName, listenerToRemove){
+    const listeners = this.listeners[eventName]
+    if(!listeners) return;
+    // Removendo a função que precisa ser removida.
+    // Quando vamos remover funções precisamos remover eles com base no endereço de memória onde ela foi criada.
+    const filteredListeners = listeners.filter((listener) => listener !== listenerToRemove);
+    this.listeners[eventName] = filteredListeners
+  }
 }
 
 const toastEventManager = new EventManager();
-toastEventManager.on('addtoast',(payload) => {
-   console.log('addtoast Listeners 1', payload)
-});
-toastEventManager.on('addtoast',(payload) => {
-  console.log('addtoast Listeners 2', payload)
-})
-toastEventManager.emit('addtoast', {
-   type: 'danger',
-   text: 'Texto'
-})
-console.log({ toastEventManager });
+
+function addToast1(payload){
+  console.log('addToast Listener 1', payload)
+}
+function addToast2(payload){
+  console.log('addToast Listener 2', payload)
+}
+
+toastEventManager.on('addtoast', addToast1)
+toastEventManager.on('addtoast', addToast2)
+toastEventManager.emit('addtoast', addToast2)
+
+toastEventManager.removeListener('addToast', 'depois de remover.')
+console.log(toastEventManager)
