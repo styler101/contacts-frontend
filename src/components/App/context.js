@@ -11,7 +11,10 @@ const AppContext = ( { children }) =>{
   }
 
   return(
-    <Context.Provider value={{ activeSideBar, onSideBar: handleSideBar}}>
+    <Context.Provider value={{
+      activeSideBar,
+      onSideBar: handleSideBar,
+      setActiveSideBar: setActiveSideBar }}>
       {children}
     </Context.Provider>
   )

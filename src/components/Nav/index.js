@@ -5,6 +5,8 @@ import * as S from './styles'
 
 function Nav(){
   const { onSideBar, activeSideBar } = useApp()
+
+
   return(
     <S.Container activeSideBar={activeSideBar}>
       { !activeSideBar && <FiMenu size={23} onClick={() => onSideBar(true)}/>}

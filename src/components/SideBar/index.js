@@ -1,14 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
+
 import { FiUser, FiX, FiFile } from 'react-icons/fi'
 import * as S from './styles'
 import {useApp} from "../App/context";
+import useClickOutSide from "../../hooks/UseClickOutSide";
 
 function SideBar(){
-  const { activeSideBar, onSideBar} = useApp()
+  const { activeSideBar, onSideBar, setActiveSideBar } = useApp()
+  const sideBarRef = useClickOutSide(() =>  setActiveSideBar(false));
 
   return ReactDOM.createPortal(
-    <S.Container activeSideBar={activeSideBar}>
+    <S.Container activeSideBar={activeSideBar} ref={sideBarRef}>
       <S.IconWrapper>
        <FiX size={20} onClick={() => onSideBar(false)}/>
       </S.IconWrapper>

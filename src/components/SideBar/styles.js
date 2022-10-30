@@ -20,7 +20,7 @@ export const IconWrapper = styled.div`
  display:flex;
  align-items:center;
  justify-content: flex-end;
- padding:2rem;
+ padding:1rem;
   svg{
     cursor:pointer;
   }
