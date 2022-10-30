@@ -15,8 +15,8 @@ export const Container = styled.div`
    display:flex;
    flex-direction:row;
    align-items:center;
-   justify-content: space-between;
-   width:200px;
+   justify-content: ${({activeSideBar}) => activeSideBar ? 'flex-end' : 'space-between'};
+   width:${({activeSideBar}) => activeSideBar ? '100%' : '230px'};
 
    span{
 

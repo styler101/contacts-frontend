@@ -7,8 +7,6 @@ P
  src/errors/PageNotFound/index.js,d/5/d5a06a143f2fdd9deab67ed91a0e384ec5d4bfda
 <
 src/index.js,f/9/f900edc44cb929c2267a16100a32851f6d5b477d
-J
-src/assets/theme/common.js,5/1/51280cae2d5de242b4aaa78ebca4b25989c43f17
 =
 .eslintignore,8/8/88939cd7e826eac4f61dd9adac091b9d64277287
 :
@@ -28,17 +26,7 @@ R
 "src/components/FormGroup/styles.js,0/a/0aadd61d8cbc34bf52db56f9e0c5a6d85030bd65
 O
 src/components/Loader/styles.js,7/0/7061c432ec9b4ee0fa5ff7bf96280d834d7e229b
-H
-src/pages/Home/styles.js,b/6/b696a5af331eb6c2698f6254f55f162eec904d46
-T
-$src/components/ContactForm/styles.js,3/c/3c2696b2445e72f522bb12bb68641482249ccac8
 M
 src/components/Form/Select.js,0/6/065e191eb13d6be2c663445cace67d16ea3570e6
-P
- src/components/Spinner/styles.js,5/5/55acc494f0412f6b6cff1ba694b065580968c1de
 T
 $src/components/Form/Button/styles.js,9/6/96bdd6e25cd2afa9a65b1e63cc9136d401ed17e6
-L
-src/components/App/styles.js,7/e/7e1c63c7515e56bda99423e28de8b4dbc3ed4979
-K
-src/assets/styles/global.js,b/2/b247f7eafb7ec3cb2b4dee8b361e9a55c010f445

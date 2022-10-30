@@ -13,6 +13,7 @@ export default createGlobalStyle`
 body{
   background-color: ${({ theme }) => theme.colors.background};
   font-size: ${({ theme }) => theme.typography.text};
+  height:100%;
   }
 
   button{
