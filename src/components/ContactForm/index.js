@@ -45,11 +45,11 @@ const ContactForm = (props) => {
       setEmail('')
       setPhone('')
       setSelectedCategory('')
-      addToast({ text: 'Contato cadastrado com sucesso!', type: 'success' })
+      addToast({ text: 'Contato cadastrado com sucesso!', type: 'success', duration:2000 })
     } catch {
       // Podemos usar o Custom event também sem parametros por exemplos se quisermos limpar todas a informações salvas no storaged
       // const removeStoragedAfterLogOut =  new CustomEvent('removestoragedafterlogout´) os custom event são case sensitive a forma como a palavra foi escrita faz diferença
-      addToast({ text: 'Erro ao cadastrar o contato', type: 'danger' })
+      addToast({ text: 'Erro ao cadastrar o contato', type: 'danger', duration: 7000 })
     } finally {
       setIsSubmitting(false)
     }

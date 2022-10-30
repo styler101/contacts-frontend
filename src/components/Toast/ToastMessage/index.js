@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ReactComponent as Icon } from '../../../assets/img/svg/check-circle.svg'
 import { ReactComponent as Icon2 } from '../../../assets/img/svg/x-circle.svg'
 import PropTypes from 'prop-types'
@@ -10,7 +10,18 @@ import * as S from './styles'
 // events -> São eventos customizados que o componente que ira ouvir e ira executar o mesmo.
 export default function ToastMessage(props) {
   const { message, onRemoveMessage } = props
-  const { type, id, text } = message
+  const { type, id, text, duration } = message
+
+  useEffect(() => {
+    const timerId = setTimeout(() => {
+      onRemoveMessage(id)
+    }, duration || 3000)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+
+  }, [onRemoveMessage, id, duration])
 
   return (
     <S.Container
@@ -31,6 +42,7 @@ ToastMessage.propsTypes = {
     id: PropTypes.number.isRequired,
     text: PropTypes.string.isRequired,
     type: PropTypes.oneOf(['default', 'success', 'danger']),
+    duration: PropTypes.number,
   }),
   onRemoveMessage: PropTypes.func,
 }
