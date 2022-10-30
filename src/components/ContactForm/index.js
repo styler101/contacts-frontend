@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
+
 import PropTypes from 'prop-types'
 
 import FormGroup from '../FormGroup'
@@ -14,18 +15,19 @@ import { addToast } from '../../utils/Toast'
 import useErrors from '../../hooks/Errors/useErrors'
 import * as S from './styles'
 
+
 // ControllerComponent -> São componentes que podem ser controlados pelo react
 // UncontrolledComponent  -> os componentes de input passam as ser gerenciados pela DOM
 const ContactForm = (props) => {
-  const { buttonLabel, onSumbit } = props
-
+  const { buttonLabel, onSumbit } = props;
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [selectedCategory, setSelectedCategory] = React.useState('')
   const [categories, setCategories] = React.useState([])
   const [isLoadingCategories, setIsLoadingCategories] = React.useState(true)
-  const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors()
 
@@ -74,6 +76,7 @@ const ContactForm = (props) => {
   function handlePhoneNumber(event) {
     setPhone(formatPhone(event.target.value))
   }
+
 
   let isFormValid = name && errors.length === 0
 

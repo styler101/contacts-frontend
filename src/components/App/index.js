@@ -3,9 +3,11 @@ import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import Routes from '../../routes/index'
 import Header from '../../components/Header'
+import Nav from '../../components/Nav'
 import * as S from './styles'
 import GlobalStyles from '../../assets/styles/global'
 import ToastContainer from '../Toast/ToastContainer'
+
 import themes from '../../assets/theme'
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
     <BrowserRouter>
       <ThemeProvider theme={themes.light}>
         <S.Container>
+          <Nav/>
           <Header />
           <Routes />
           <ToastContainer />

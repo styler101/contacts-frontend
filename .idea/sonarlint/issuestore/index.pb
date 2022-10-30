@@ -5,8 +5,6 @@ K
 src/assets/img/svg/logo.svg,4/6/468970ec4de0a2f14174c1014af04622e3fb173d
 P
  src/errors/PageNotFound/index.js,d/5/d5a06a143f2fdd9deab67ed91a0e384ec5d4bfda
-L
-src/utils/Formaters/index.js,1/e/1e491c78acd78bc24856483dc052c4e8c2e9365b
 <
 src/index.js,f/9/f900edc44cb929c2267a16100a32851f6d5b477d
 J
@@ -24,8 +22,6 @@ U
 %src/components/RequestError/styles.js,7/d/7d8145ef4dacdbc003f6aaea981abbc5e8256498
 T
 $src/components/RequestError/index.js,0/7/0771aa9765df9363af89a587f5ea5cf4d9da23b3
-P
- src/services/categories/index.js,c/4/c49d5fd421049f3dfe1565513f1d11b342b60bda
 N
 src/components/Loader/index.js,c/d/cda572585d8b0bc6bf79e333f1f9485d32738bee
 R
@@ -42,8 +38,6 @@ P
  src/components/Spinner/styles.js,5/5/55acc494f0412f6b6cff1ba694b065580968c1de
 T
 $src/components/Form/Button/styles.js,9/6/96bdd6e25cd2afa9a65b1e63cc9136d401ed17e6
-P
- src/services/utils/HttpClient.js,2/0/2083674cf7b2ae7c81541f78e0bddfeb7831eab6
 L
 src/components/App/styles.js,7/e/7e1c63c7515e56bda99423e28de8b4dbc3ed4979
 K
