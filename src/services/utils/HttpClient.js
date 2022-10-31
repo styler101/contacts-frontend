@@ -25,7 +25,6 @@ export default class HttpClient {
   }
 
    put(path, payload){
-
      return this.makeRequest(path, { method: 'PUT', body: payload })
    }
 

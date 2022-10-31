@@ -10,11 +10,10 @@ import Button from '../Form/Button/index'
 import categoriesService from '../../services/categories'
 
 import { isEmailValid } from '../../utils/Validators/index'
-import { formatPhone } from '../../utils/Formaters/index'
 import { addToast } from '../../utils/Toast'
 import useErrors from '../../hooks/Errors/useErrors'
 import * as S from './styles'
-import { notEmptyStringOrDefault } from '../../utils/Formaters'
+import { notEmptyStringOrDefault, formatPhone } from '../../utils/Formaters'
 // ControllerComponent -> São componentes que podem ser controlados pelo react
 // UncontrolledComponent  -> os componentes de input passam as ser gerenciados pela DOM
 
@@ -37,7 +36,7 @@ const ContactForm = forwardRef((props, ref) => {
       setFieldValues: (contact) => {
         setName(notEmptyStringOrDefault(contact.name));
         setEmail(notEmptyStringOrDefault(contact.email));
-        setPhone(notEmptyStringOrDefault(contact.phone));
+        setPhone(notEmptyStringOrDefault(formatPhone(contact.phone), ''));
         setSelectedCategory(notEmptyStringOrDefault(contact.category_id));
       }
     }
@@ -57,11 +56,7 @@ const ContactForm = forwardRef((props, ref) => {
         phone,
         category_id: selectedCategory,
       }
-      //await onSumbit(payload)
-      setName('')
-      setEmail('')
-      setPhone('')
-      setSelectedCategory('')
+      await onSumbit(payload)
       addToast({
         text: 'Contato cadastrado com sucesso!',
         type: 'success',

@@ -14,8 +14,13 @@ class ContactService {
    getContactById(id){
     return this.httpClient.get(`/contacts/${id}`)
   }
+
    createContact(payload){
     return this.httpClient.post('/contacts', payload)
+  }
+
+  updateContact(id, payload){
+    return this.httpClient.put(`/contacts/${id}`, payload)
   }
 }
 
