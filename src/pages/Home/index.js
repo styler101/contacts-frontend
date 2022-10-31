@@ -8,6 +8,7 @@ import editIcon from '../../assets/img/svg/edit.svg'
 import trashIcon from '../../assets/img/svg/trash.svg'
 import searchIcon from '../../assets/img/svg/magnifier-question.svg'
 import contactService from '../../services/contact/ContactService'
+import Modal from '../../components/Modal'
 import { formatPhone } from '../../utils/Formaters'
 
 import * as S from './styles'
@@ -26,6 +27,7 @@ const Home = () => {
   const [data, setData] = React.useState([])
   const [sort, setSort] = React.useState('ASC')
   const [hasError, setHasError] = React.useState(false)
+  const [openModal, setOpenModal] = React.useState(null)
 
 
   const loadContacts = useCallback(async () => {
@@ -62,6 +64,7 @@ const Home = () => {
 
   return (
     <React.Fragment>
+
       { hasError ? ( <RequestError onLoadData={loadContacts}/>): (
         <React.Fragment>
 
@@ -135,7 +138,21 @@ const Home = () => {
                             <img src={editIcon} alt='edit icon' />
                           </Link>
                           <button>
-                            <img src={trashIcon} alt='trash icon' />
+                            <img src={trashIcon} alt='trash icon' onClick={() =>  setOpenModal(
+                              <Modal danger actions={{
+                              onConfirm: {
+                                confirmHandler: () => {},
+                                confirmLabelButton: 'Deletar'
+                              },
+                               onCancel: {
+                                cancelLabelButton: 'Cancelar',
+                                 cancelHandler: () => setOpenModal(null)
+                               }
+
+                              }}>
+                                <h1> Tem certeza que deseja remover o contacto {`"${contact.name}"`}</h1>
+                                <p> Corpo do modal</p>
+                              </Modal>)} />
                           </button>
                         </div>
                       </S.Card>
@@ -146,6 +163,7 @@ const Home = () => {
       ) }
           </React.Fragment>
       )}
+      {openModal}
     </React.Fragment>
   )
 }

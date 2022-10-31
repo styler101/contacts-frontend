@@ -28,8 +28,6 @@ O
 src/components/Loader/styles.js,7/0/7061c432ec9b4ee0fa5ff7bf96280d834d7e229b
 M
 src/components/Form/Select.js,0/6/065e191eb13d6be2c663445cace67d16ea3570e6
-T
-$src/components/Form/Button/styles.js,9/6/96bdd6e25cd2afa9a65b1e63cc9136d401ed17e6
 Z
 *src/components/Toast/ToastMessage/index.js,b/2/b25f87fbfd1c48b66f640f0279294e70c5ac5d79
 H
@@ -42,8 +40,6 @@ Q
 package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
 P
  src/services/categories/index.js,c/4/c49d5fd421049f3dfe1565513f1d11b342b60bda
-L
-src/components/App/styles.js,7/e/7e1c63c7515e56bda99423e28de8b4dbc3ed4979
 P
  src/components/Spinner/styles.js,5/5/55acc494f0412f6b6cff1ba694b065580968c1de
 T
@@ -54,12 +50,8 @@ I
 src/assets/theme/light.js,1/3/13eb43629c766ac11a6c3665c6d98f0dd5058976
 J
 src/assets/theme/common.js,5/1/51280cae2d5de242b4aaa78ebca4b25989c43f17
-K
-src/assets/styles/global.js,b/2/b247f7eafb7ec3cb2b4dee8b361e9a55c010f445
 A
 public/index.html,f/4/f43ecdf8d666ee908aacce037b4cd72159e4741b
-K
-src/components/App/index.js,7/3/73c53abe0743d7f8b19d5c6990f23f35ed252351
 H
 src/pages/Home/styles.js,b/6/b696a5af331eb6c2698f6254f55f162eec904d46
 L
@@ -74,8 +66,6 @@ P
  src/components/SideBar/styles.js,4/f/4f8a027801624db02e76b2a5318f4f05b30616aa
 O
 src/components/SideBar/index.js,4/c/4cc48f0c995e2d88edbf0c4e436b076796e49290
-G
-src/pages/Home/index.js,9/b/9bffdeb82052effebb3c0edd38520e79ef2b7848
 >
 .eslintrc.json,7/1/71c20a341bfe32aa5cd5b4384e94f942bab6a7d3
 L

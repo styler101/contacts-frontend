@@ -23,4 +23,8 @@ body{
   a{
     text-decoration:none;
   }
+
+  #portal-root{
+    overflow-y: hidden;
+  }
 `

@@ -6,7 +6,9 @@ export const Overlay = styled.div`
   height:100%;
   background:rgba(0,0,0,0.6);
   backdrop-filter:blur(3px);
-  position:absolute;
+  position:fixed;
+  overflow-y:hidden;
+
   top:0;
   left:0;
   display:flex;
@@ -53,7 +55,7 @@ justify-content: flex-end;
     cursor: pointer;
   }
 .cancel{
- margin-right: 1rem;
+ margin-right: 2rem;
  background:transparent;
  border:0;
  font-size: 1rem;

@@ -42,6 +42,11 @@ export const Container = styled.button`
       background:${theme.colors.danger.dark};
     }
 
+    ${(props) => props.danger && css`
+   h1{
+     color: ${(props) => props.theme.colors.danger.main}
+   }
+  `}
   `}
 `
 

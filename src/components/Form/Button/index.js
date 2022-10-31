@@ -5,11 +5,10 @@ import * as S from './styles'
 
 
 export default function Button(props){
-  const { children, isLoading, disabled, type  } = props;
+  const { children, isLoading, ...rest } = props;
   return(
     <S.Container
-      disabled={disabled  || isLoading}
-      type={type}>
+      {...rest}>
       {isLoading ? <Spinner width={16} height={16}/> : children}
     </S.Container>
   )
@@ -21,6 +20,7 @@ Button.propsTypes = {
   isLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   children: PropTypes.node,
+  danger: PropTypes.bool
 
 }
 
@@ -28,5 +28,6 @@ Button.defaultProps ={
   type: 'button',
   isLoading: false,
   disabled: false,
+  danger: false
 }
 

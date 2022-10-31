@@ -5,16 +5,18 @@ import Button from "../Form/Button";
 import * as S from  './styles'
 
 const Modal = (props) =>{
-  const { danger } = props;
+  const { danger, actions, children } = props;
+  const { onCancel, onConfirm } = actions
+  const {cancelHandler, cancelLabelButton } = onCancel
+  const { confirmHandler, confirmLabelButton} = onConfirm
 
   return ReactDOM.createPortal((
     <S.Overlay>
       <S.Container danger={danger}>
-        <h1> Titulo do Modal  </h1>
-        <p> Corpo do modal </p>
+        {children}
         <S.Footer>
-          <button type="button" className="cancel"> Cancelar </button>
-          <Button type="button" danger={danger}> Deletar </Button>
+          {(onCancel && onCancel?.cancelLabelButton) && ( <button type="button" className="cancel" onClick={cancelHandler}> {cancelLabelButton} </button>)}
+          {(onConfirm && onConfirm?.confirmLabelButton) &&  (<Button type="button" danger={danger} onClick={confirmHandler}> {confirmLabelButton} </Button>)}
         </S.Footer>
       </S.Container>
     </S.Overlay>
@@ -23,11 +25,31 @@ const Modal = (props) =>{
 }
 
 Modal.propTypes ={
-  danger: PropTypes.bool.isRequired
+  danger: PropTypes.bool.isRequired,
+  actions: PropTypes.shape({
+     onCancel: PropTypes.shape({
+       cancelLabelButton: PropTypes.string,
+       cancelHandler: PropTypes.func
+     }),
+    onConfirm: PropTypes.shape({
+      confirmLabelButton: PropTypes.string,
+      confirmHandler: PropTypes.func
+    }),
+  })
 }
 
 Modal.defaultProps ={
-  danger: false
+  danger: false,
+   actions:{
+    onCancel:{
+      cancelHandler: () => {},
+      cancelLabelButton: 'Cancelar'
+    },
+    onConfirm:{
+      confirmHandler: () => {},
+      confirmLabelButton: 'Confirmar'
+    }
+  }
 }
 
 
