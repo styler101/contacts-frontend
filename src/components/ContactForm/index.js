@@ -1,4 +1,9 @@
-import React, { useCallback, useEffect, forwardRef, useImperativeHandle  } from 'react'
+import React, {
+  useCallback,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
+} from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -30,20 +35,27 @@ const ContactForm = forwardRef((props, ref) => {
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors()
 
+  useImperativeHandle(
+    ref,
+    () => {
+      return {
+        setFieldValues: (contact) => {
+          setName(notEmptyStringOrDefault(contact.name))
+          setEmail(notEmptyStringOrDefault(contact.email))
+          setPhone(notEmptyStringOrDefault(formatPhone(contact.phone), ''))
+          setSelectedCategory(notEmptyStringOrDefault(contact.category_id))
+        },
 
-  useImperativeHandle(ref, () => {
-    return {
-      setFieldValues: (contact) => {
-        setName(notEmptyStringOrDefault(contact.name));
-        setEmail(notEmptyStringOrDefault(contact.email));
-        setPhone(notEmptyStringOrDefault(formatPhone(contact.phone), ''));
-        setSelectedCategory(notEmptyStringOrDefault(contact.category_id));
+        resetFields: () => {
+          setName('')
+          setEmail('')
+          setPhone('')
+          setSelectedCategory('')
+        },
       }
-    }
-  },[])
-
-
-
+    },
+    []
+  )
 
   async function handleSubmit(event) {
     event.preventDefault()

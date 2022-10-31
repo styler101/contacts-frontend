@@ -78,21 +78,9 @@ G
 src/pages/Home/index.js,9/b/9bffdeb82052effebb3c0edd38520e79ef2b7848
 >
 .eslintrc.json,7/1/71c20a341bfe32aa5cd5b4384e94f942bab6a7d3
-S
-#.idea/sonarlint/issuestore/index.pb,9/f/9fe84ebb15faf917b7def6236dba604453cc61e0
 L
 src/utils/Formaters/index.js,1/e/1e491c78acd78bc24856483dc052c4e8c2e9365b
 M
 src/utils/Validators/index.js,9/b/9b2fe09488a658b18160af23004a5ed4d677a385
-M
-src/pages/NewContact/index.js,2/7/279d0a2d947cb90fb61e3b025d10486e0031e9be
-S
-#src/components/ContactForm/index.js,1/b/1be0a72e4c47bc0fa97bb65e9b08aa1101c189e2
 Q
 !src/components/FormGroup/index.js,5/4/5463349f478267bbe80d9f059b967a3d306efe2b
-P
- src/services/utils/HttpClient.js,2/0/2083674cf7b2ae7c81541f78e0bddfeb7831eab6
-N
-src/pages/EditContact/index.js,1/c/1c4a042cfd2f06b76dc646511e8ad64f404f9c5e
-V
-&src/services/contact/ContactService.js,b/1/b11b06226a1c5ddb93f1e34f60d59a3b5b91841f
