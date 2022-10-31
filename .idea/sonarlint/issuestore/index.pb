@@ -46,14 +46,10 @@ L
 package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
 V
 &src/services/contact/ContactService.js,b/1/b11b06226a1c5ddb93f1e34f60d59a3b5b91841f
-S
-#src/components/ContactForm/index.js,1/b/1be0a72e4c47bc0fa97bb65e9b08aa1101c189e2
 P
  src/services/categories/index.js,c/4/c49d5fd421049f3dfe1565513f1d11b342b60bda
 L
 src/components/App/styles.js,7/e/7e1c63c7515e56bda99423e28de8b4dbc3ed4979
-G
-src/pages/Home/index.js,9/b/9bffdeb82052effebb3c0edd38520e79ef2b7848
 P
  src/components/Spinner/styles.js,5/5/55acc494f0412f6b6cff1ba694b065580968c1de
 T
@@ -70,9 +66,21 @@ A
 public/index.html,f/4/f43ecdf8d666ee908aacce037b4cd72159e4741b
 K
 src/components/App/index.js,7/3/73c53abe0743d7f8b19d5c6990f23f35ed252351
-N
-src/pages/EditContact/index.js,1/c/1c4a042cfd2f06b76dc646511e8ad64f404f9c5e
 H
 src/pages/Home/styles.js,b/6/b696a5af331eb6c2698f6254f55f162eec904d46
 L
 src/components/Nav/styles.js,2/8/288385b5cc83c6c696a4c922d6a9e5db8b965b42
+M
+src/components/App/context.js,4/b/4b09168b45cedba0b3d691c3d072668db96f3539
+K
+src/components/Nav/index.js,3/d/3def2b11d3ff3593110130ec98579da7c69ea056
+R
+"src/hooks/UseClickOutSide/index.js,1/9/1918175fdbed596ca72a94111167c14fe9bed5bb
+P
+ src/components/SideBar/styles.js,4/f/4f8a027801624db02e76b2a5318f4f05b30616aa
+O
+src/components/SideBar/index.js,4/c/4cc48f0c995e2d88edbf0c4e436b076796e49290
+Q
+!src/components/FormGroup/index.js,5/4/5463349f478267bbe80d9f059b967a3d306efe2b
+G
+src/pages/Home/index.js,9/b/9bffdeb82052effebb3c0edd38520e79ef2b7848

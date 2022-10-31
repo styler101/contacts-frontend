@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, forwardRef, useImperativeHandle  } from 'react'
 
 import PropTypes from 'prop-types'
 
@@ -14,22 +14,37 @@ import { formatPhone } from '../../utils/Formaters/index'
 import { addToast } from '../../utils/Toast'
 import useErrors from '../../hooks/Errors/useErrors'
 import * as S from './styles'
-
-
+import { notEmptyStringOrDefault } from '../../utils/Formaters'
 // ControllerComponent -> São componentes que podem ser controlados pelo react
 // UncontrolledComponent  -> os componentes de input passam as ser gerenciados pela DOM
-const ContactForm = (props) => {
-  const { buttonLabel, onSumbit } = props;
+
+const ContactForm = forwardRef((props, ref) => {
+  const { buttonLabel, onSumbit } = props
   const [name, setName] = React.useState('')
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [selectedCategory, setSelectedCategory] = React.useState('')
   const [categories, setCategories] = React.useState([])
   const [isLoadingCategories, setIsLoadingCategories] = React.useState(true)
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [loading, setLoading] = React.useState(false)
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors()
+
+
+  useImperativeHandle(ref, () => {
+    return {
+      setFieldValues: (contact) => {
+        setName(notEmptyStringOrDefault(contact.name));
+        setEmail(notEmptyStringOrDefault(contact.email));
+        setPhone(notEmptyStringOrDefault(contact.phone));
+        setSelectedCategory(notEmptyStringOrDefault(contact.category_id));
+      }
+    }
+  },[])
+
+
+
 
   async function handleSubmit(event) {
     event.preventDefault()
@@ -47,11 +62,19 @@ const ContactForm = (props) => {
       setEmail('')
       setPhone('')
       setSelectedCategory('')
-      addToast({ text: 'Contato cadastrado com sucesso!', type: 'success', duration:2000 })
+      addToast({
+        text: 'Contato cadastrado com sucesso!',
+        type: 'success',
+        duration: 2000,
+      })
     } catch {
       // Podemos usar o Custom event também sem parametros por exemplos se quisermos limpar todas a informações salvas no storaged
       // const removeStoragedAfterLogOut =  new CustomEvent('removestoragedafterlogout´) os custom event são case sensitive a forma como a palavra foi escrita faz diferença
-      addToast({ text: 'Erro ao cadastrar o contato', type: 'danger', duration: 7000 })
+      addToast({
+        text: 'Erro ao cadastrar o contato',
+        type: 'danger',
+        duration: 7000,
+      })
     } finally {
       setIsSubmitting(false)
     }
@@ -76,7 +99,6 @@ const ContactForm = (props) => {
   function handlePhoneNumber(event) {
     setPhone(formatPhone(event.target.value))
   }
-
 
   let isFormValid = name && errors.length === 0
 
@@ -158,7 +180,7 @@ const ContactForm = (props) => {
       </S.Form>
     </React.Fragment>
   )
-}
+})
 
 ContactForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,

@@ -6,25 +6,34 @@ import ContactService from '../../services/contact/ContactService'
 import Loader from '../../components/Loader'
 import { addToast } from "../../utils/Toast";
 
+
 const EditContact = () =>{
   const { id } = useParams();
   const history = useHistory()
+
   const [loading, setLoading] = React.useState(true)
+  const contactFormRef = React.useRef(null);
+
+
 
   const loadContactData = React.useCallback(async() =>{
     try{
       const contact = await ContactService.getContactById(id)
       setLoading(false)
-    }catch{
+      contactFormRef.current.setFieldValues(contact);
+    }catch(error){
+      console.log(error)
       addToast({
         text: 'Contato não encontrado',
         duration: 3000,
         type: 'danger'
       })
-      history.push('/')
+    //  history.push('/')
     }
 
   },[id, history])
+
+
 
   React.useEffect(() =>{
       loadContactData()
@@ -35,7 +44,10 @@ const EditContact = () =>{
       { loading && <Loader loading={loading}/>}
        <React.Fragment>
          <PageHeader title={"Editar Contato "}/>
-         <ContactForm buttonLabel={'Editar Alterações'}/>
+         <ContactForm
+           ref={contactFormRef}
+           buttonLabel={'Editar Alterações'}
+          />
        </React.Fragment>
 
 
