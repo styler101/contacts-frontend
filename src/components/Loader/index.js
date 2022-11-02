@@ -1,38 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom'
+import React from 'react'
 import PropTypes from 'prop-types'
-
+import CreateReactPortal from '../../hooks/ReactPortal'
 import * as S from './styles'
 
-
-
-const Loading = (props) =>{
-  const { loading } = props;
-
-  return !loading ?
-    <React.Fragment></React.Fragment> : ReactDOM.createPortal(
-    (
+const Loading = (props) => {
+  const { loading } = props
+  if (!loading) return null
+  return (
+    <CreateReactPortal containerId='loading-root'>
       <S.Overlay>
         <S.StyleSpinner>
-          <S.CustomSpinner/>
+          <S.CustomSpinner />
         </S.StyleSpinner>
-
       </S.Overlay>
-
-    ), document.getElementById("loading-root")
-
+    </CreateReactPortal>
   )
-
-
 }
 
-
 Loading.propTypes = {
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
 }
 
 Loading.defaultProps = {
-  loading:false
+  loading: false,
 }
 
-export default Loading;
+export default Loading
