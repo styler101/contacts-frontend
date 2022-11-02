@@ -10,6 +10,7 @@ const Modal = (props) => {
   const { cancelHandler, cancelLabelButton } = onCancel
   const { confirmHandler, confirmLabelButton } = onConfirm
 
+  console.log('Moda Lodaing', isLoading)
   return (
     <CreateReactPortal containerId={'modal-root'}>
       <S.Overlay>
@@ -17,7 +18,12 @@ const Modal = (props) => {
           {children}
           <S.Footer>
             {onCancel && onCancel?.cancelLabelButton && (
-              <button type='button' className='cancel' onClick={cancelHandler}>
+              <button
+                type='button'
+                className='cancel'
+                onClick={cancelHandler}
+                disabled={isLoading}
+              >
                 {' '}
                 {cancelLabelButton}{' '}
               </button>

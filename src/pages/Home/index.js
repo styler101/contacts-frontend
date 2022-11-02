@@ -14,7 +14,7 @@ import { addToast } from '../../utils/Toast'
 import * as S from './styles'
 import RequestError from '../../components/RequestError'
 import EmptyData from '../../components/EmptyData'
-import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers'
+import useSafeAsyncState from '../../hooks/UseSafeAsyncState'
 
 // SameOriginPolicy(SOP)  -> Politica de mesma origem só existem dentro de navegadores é quando fazendo a requisão para o mesmo endereço só funciona com funções de requisições com javascript.
 // Origin -> é a nossa url conjunto de protolocolo, dominio e porta.
@@ -26,11 +26,11 @@ import { toHaveStyle } from '@testing-library/jest-dom/dist/matchers'
 const Home = () => {
   const [searchTerm, setSearchTerm] = React.useState('')
   const [loading, setLoading] = React.useState(true)
-  const [data, setData] = React.useState([])
+  const [data, setData] = useSafeAsyncState([])
   const [sort, setSort] = React.useState('ASC')
   const [hasError, setHasError] = React.useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = React.useState(null)
-  const [deleteLoading, setDeleteLoading] = React.useState(true)
+  const [deleteLoading, setDeleteLoading] = React.useState(false)
 
   const loadContacts = useCallback(async () => {
     try {
@@ -42,7 +42,7 @@ const Home = () => {
     } finally {
       setLoading(false)
     }
-  }, [sort])
+  }, [sort, setData])
 
   React.useEffect(() => {
     loadContacts()
@@ -79,7 +79,7 @@ const Home = () => {
         text: 'Ocorreu um erro ao deletar o contato!',
       })
     } finally {
-      // setDeleteLoading(false)
+      setDeleteLoading(false)
     }
   }
 
@@ -171,7 +171,7 @@ const Home = () => {
                               onClick={() =>
                                 setIsDeleteModalVisible(
                                   <Modal
-                                    isloading={deleteLoading}
+                                    isLoading={deleteLoading}
                                     danger
                                     actions={{
                                       onConfirm: {

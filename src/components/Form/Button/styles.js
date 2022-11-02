@@ -27,6 +27,7 @@ export const Container = styled.button`
     background: #ccc !important;
     box-shadow: none !important;
     cursor: default !important;
+    width: 110px;
   }
 
   ${({ theme, danger }) =>

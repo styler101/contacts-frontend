@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 // Função  para salvar estados de forma asyncrona
 
 export default function useSafeAsyncState(initialState) {
@@ -13,11 +13,11 @@ export default function useSafeAsyncState(initialState) {
     }
   }, [])
 
-  function setSafeAsyncSate(data) {
+  const setSafeAsyncSate = useCallback((data) => {
     if (isMounted.current) {
       setState(data)
     }
-  }
+  }, [])
 
   return [state, setSafeAsyncSate]
 }
