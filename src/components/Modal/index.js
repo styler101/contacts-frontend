@@ -1,56 +1,73 @@
-import React from 'react';
+import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import Button from "../Form/Button";
-import * as S from  './styles'
+import Button from '../Form/Button'
+import * as S from './styles'
+import Spinner from '../Spinner'
 
-const Modal = (props) =>{
-  const { danger, actions, children } = props;
+const Modal = (props) => {
+  const { danger, actions, children, isLoading } = props
   const { onCancel, onConfirm } = actions
-  const {cancelHandler, cancelLabelButton } = onCancel
-  const { confirmHandler, confirmLabelButton} = onConfirm
+  const { cancelHandler, cancelLabelButton } = onCancel
+  const { confirmHandler, confirmLabelButton } = onConfirm
 
-  return ReactDOM.createPortal((
+  return ReactDOM.createPortal(
     <S.Overlay>
       <S.Container danger={danger}>
         {children}
         <S.Footer>
-          {(onCancel && onCancel?.cancelLabelButton) && ( <button type="button" className="cancel" onClick={cancelHandler}> {cancelLabelButton} </button>)}
-          {(onConfirm && onConfirm?.confirmLabelButton) &&  (<Button type="button" danger={danger} onClick={confirmHandler}> {confirmLabelButton} </Button>)}
+          {onCancel && onCancel?.cancelLabelButton && (
+            <button type='button' className='cancel' onClick={cancelHandler}>
+              {' '}
+              {cancelLabelButton}{' '}
+            </button>
+          )}
+          {onConfirm && onConfirm?.confirmLabelButton && (
+            <Button
+              type='button'
+              danger={danger}
+              onClick={confirmHandler}
+              isLoading={isLoading}
+              disabled={isLoading}
+            >
+              {confirmLabelButton}
+            </Button>
+          )}
         </S.Footer>
       </S.Container>
-    </S.Overlay>
-  ), document.getElementById("portal-root"))
-
+    </S.Overlay>,
+    document.getElementById('portal-root')
+  )
 }
 
-Modal.propTypes ={
+Modal.propTypes = {
   danger: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   actions: PropTypes.shape({
-     onCancel: PropTypes.shape({
-       cancelLabelButton: PropTypes.string,
-       cancelHandler: PropTypes.func
-     }),
+    onCancel: PropTypes.shape({
+      cancelLabelButton: PropTypes.string,
+      cancelHandler: PropTypes.func,
+    }),
     onConfirm: PropTypes.shape({
       confirmLabelButton: PropTypes.string,
-      confirmHandler: PropTypes.func
+      confirmHandler: PropTypes.func,
     }),
-  })
+  }),
 }
 
-Modal.defaultProps ={
+Modal.defaultProps = {
   danger: false,
-   actions:{
-    onCancel:{
+  isLoading: false,
+  actions: {
+    onCancel: {
       cancelHandler: () => {},
-      cancelLabelButton: 'Cancelar'
+      cancelLabelButton: 'Cancelar',
     },
-    onConfirm:{
+    onConfirm: {
       confirmHandler: () => {},
-      confirmLabelButton: 'Confirmar'
-    }
-  }
+      confirmLabelButton: 'Confirmar',
+    },
+  },
 }
 
-
-export default Modal;
+export default Modal

@@ -1,33 +1,29 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from 'prop-types'
-import Spinner from "../../Spinner";
+import Spinner from '../../Spinner'
 import * as S from './styles'
 
-
-export default function Button(props){
-  const { children, isLoading, ...rest } = props;
-  return(
-    <S.Container
-      {...rest}>
-      {isLoading ? <Spinner width={16} height={16}/> : children}
+export default function Button(props) {
+  const { children, isLoading, ...rest } = props
+  console.log('IsLoading', isLoading)
+  return (
+    <S.Container {...rest}>
+      {isLoading ? <Spinner width={16} height={16} /> : children}
     </S.Container>
   )
 }
-
 
 Button.propsTypes = {
   type: PropTypes.string,
   isLoading: PropTypes.bool,
   disabled: PropTypes.bool,
   children: PropTypes.node,
-  danger: PropTypes.bool
-
+  danger: PropTypes.bool,
 }
 
-Button.defaultProps ={
+Button.defaultProps = {
   type: 'button',
   isLoading: false,
   disabled: false,
-  danger: false
+  danger: false,
 }
-

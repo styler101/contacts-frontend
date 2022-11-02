@@ -4,23 +4,29 @@ class ContactService {
   constructor() {
     this.httpClient = new HttpClient('http://localhost:3001')
   }
-   listContacts(orderBy = 'asc') {
-    return this.httpClient.get(`/contacts?orderBy=${orderBy}`, { headers: {
-       'Authorization': 'Testando 1234',
-        'Authorization2': 'Testando 1234'
-      }})
+  listContacts(orderBy = 'asc') {
+    return this.httpClient.get(`/contacts?orderBy=${orderBy}`, {
+      headers: {
+        Authorization: 'Testando 1234',
+        Authorization2: 'Testando 1234',
+      },
+    })
   }
 
-   getContactById(id){
+  getContactById(id) {
     return this.httpClient.get(`/contacts/${id}`)
   }
 
-   createContact(payload){
+  createContact(payload) {
     return this.httpClient.post('/contacts', payload)
   }
 
-  updateContact(id, payload){
+  updateContact(id, payload) {
     return this.httpClient.put(`/contacts/${id}`, payload)
+  }
+
+  deleteContact(id) {
+    return this.httpClient.delete(`/contacts/${id}`)
   }
 }
 
