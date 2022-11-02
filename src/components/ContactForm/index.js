@@ -13,12 +13,12 @@ import Select from '../Form/Select'
 import Button from '../Form/Button/index'
 
 import categoriesService from '../../services/categories'
-
 import { isEmailValid } from '../../utils/Validators/index'
 import { addToast } from '../../utils/Toast'
 import useErrors from '../../hooks/Errors/useErrors'
 import * as S from './styles'
 import { notEmptyStringOrDefault, formatPhone } from '../../utils/Formaters'
+import useSafeAsyncState from '../../hooks/UseSafeAsyncState'
 // ControllerComponent -> São componentes que podem ser controlados pelo react
 // UncontrolledComponent  -> os componentes de input passam as ser gerenciados pela DOM
 
@@ -28,13 +28,12 @@ const ContactForm = forwardRef((props, ref) => {
   const [email, setEmail] = React.useState('')
   const [phone, setPhone] = React.useState('')
   const [selectedCategory, setSelectedCategory] = React.useState('')
-  const [categories, setCategories] = React.useState([])
-  const [isLoadingCategories, setIsLoadingCategories] = React.useState(true)
   const [isSubmitting, setIsSubmitting] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors()
-
+  const [categories, setCategories] = useSafeAsyncState([])
+  const [isLoadingCategories, setIsLoadingCategories] = useSafeAsyncState(true)
   useImperativeHandle(
     ref,
     () => {
@@ -119,7 +118,7 @@ const ContactForm = forwardRef((props, ref) => {
     } finally {
       setIsLoadingCategories(false)
     }
-  }, [])
+  }, [setCategories, setIsLoadingCategories])
 
   useEffect(() => {
     loadContacts()

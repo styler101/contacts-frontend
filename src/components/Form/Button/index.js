@@ -5,7 +5,7 @@ import * as S from './styles'
 
 export default function Button(props) {
   const { children, isLoading, ...rest } = props
-  console.log('IsLoading', isLoading)
+  console.log(isLoading)
   return (
     <S.Container {...rest}>
       {isLoading ? <Spinner width={16} height={16} /> : children}

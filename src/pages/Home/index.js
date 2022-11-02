@@ -30,7 +30,7 @@ const Home = () => {
   const [sort, setSort] = React.useState('ASC')
   const [hasError, setHasError] = React.useState(false)
   const [isDeleteModalVisible, setIsDeleteModalVisible] = React.useState(null)
-  const [deleteLoading, setDeleteLoading] = React.useState(false)
+  const [deleteLoading, setDeleteLoading] = React.useState(true)
 
   const loadContacts = useCallback(async () => {
     try {
@@ -74,18 +74,15 @@ const Home = () => {
       })
       await loadContacts(sort)
     } catch (error) {
-      console.log(error)
       addToast({
         type: 'danger',
         text: 'Ocorreu um erro ao deletar o contato!',
       })
     } finally {
-      setDeleteLoading(false)
-      setIsDeleteModalVisible(null)
+      // setDeleteLoading(false)
     }
   }
 
-  console.log('deleteLoading', deleteLoading)
   return (
     <React.Fragment>
       {hasError ? (
@@ -174,12 +171,14 @@ const Home = () => {
                               onClick={() =>
                                 setIsDeleteModalVisible(
                                   <Modal
-                                    loading={deleteLoading}
+                                    isloading={deleteLoading}
                                     danger
                                     actions={{
                                       onConfirm: {
-                                        confirmHandler: async () =>
-                                          handleConfirmDelete(contact.id),
+                                        confirmHandler: async () => {
+                                          await handleConfirmDelete(contact.id)
+                                          setIsDeleteModalVisible(null)
+                                        },
                                         confirmLabelButton: 'Deletar',
                                       },
                                       onCancel: {

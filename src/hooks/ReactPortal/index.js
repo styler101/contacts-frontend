@@ -13,7 +13,7 @@ export default function CreateReactPortal({ containerId, children }) {
 
 CreateReactPortal.propTypes = {
   containerId: PropTypes.string,
-  childre: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired,
 }
 
 CreateReactPortal.defaultProps = {
