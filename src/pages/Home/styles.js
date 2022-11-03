@@ -84,7 +84,6 @@ export const ListContainer = styled.header`
     if (props.direction === 'ASC') {
       return css`
         img {
-
           transform: rotate(90deg);
         }
       `
@@ -99,13 +98,14 @@ export const ListContainer = styled.header`
 export const Card = styled.div`
   width: 100%;
   margin: 1rem 0;
-  background: #fff;
+  background: ${(props) => props.theme.colors.white};
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   padding: 1rem;
   border-radius: ${(props) => props.theme.borderRadius};
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-radius: 5px;
 
   .info {
     .contact-name {
@@ -142,18 +142,16 @@ export const Card = styled.div`
 `
 
 export const SearchNotFound = styled.div`
-  margin-top:1rem;
-  display:flex;
-  align-items:flex-start;
+  margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
   justify-content: center;
-  span{
+  span {
     margin-left: 1.5rem;
-    color:${({theme}) => theme.colors.gray['200']};
+    color: ${({ theme }) => theme.colors.gray['200']};
     word-break: break-word;
-    strong{
-      max-width:240px;
-
+    strong {
+      max-width: 240px;
     }
-
   }
 `
