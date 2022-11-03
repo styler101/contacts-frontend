@@ -1,6 +1,7 @@
 import React, {
   useCallback,
   useEffect,
+  useState,
   forwardRef,
   useImperativeHandle,
 } from 'react'
@@ -12,24 +13,27 @@ import Input from '../Form/Input'
 import Select from '../Form/Select'
 import Button from '../Form/Button/index'
 
+import useSafeAsyncState from '../../hooks/UseSafeAsyncState'
+import useErrors from '../../hooks/Errors/useErrors'
+
 import categoriesService from '../../services/categories'
+
 import { isEmailValid } from '../../utils/Validators/index'
 import { addToast } from '../../utils/Toast'
-import useErrors from '../../hooks/Errors/useErrors'
-import * as S from './styles'
 import { notEmptyStringOrDefault, formatPhone } from '../../utils/Formaters'
-import useSafeAsyncState from '../../hooks/UseSafeAsyncState'
+
+import * as S from './styles'
 // ControllerComponent -> São componentes que podem ser controlados pelo react
 // UncontrolledComponent  -> os componentes de input passam as ser gerenciados pela DOM
 
 const ContactForm = forwardRef((props, ref) => {
   const { buttonLabel, onSumbit } = props
-  const [name, setName] = React.useState('')
-  const [email, setEmail] = React.useState('')
-  const [phone, setPhone] = React.useState('')
-  const [selectedCategory, setSelectedCategory] = React.useState('')
-  const [isSubmitting, setIsSubmitting] = React.useState(false)
-  const [loading, setLoading] = React.useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [loading, setLoading] = useState(false)
   const { errors, setError, removeError, getErrorMessageByFieldName } =
     useErrors()
   const [categories, setCategories] = useSafeAsyncState([])
@@ -39,10 +43,11 @@ const ContactForm = forwardRef((props, ref) => {
     () => {
       return {
         setFieldValues: (contact) => {
+          console.log(contact)
           setName(notEmptyStringOrDefault(contact.name))
           setEmail(notEmptyStringOrDefault(contact.email))
           setPhone(notEmptyStringOrDefault(formatPhone(contact.phone), ''))
-          setSelectedCategory(notEmptyStringOrDefault(contact.category_id))
+          setSelectedCategory(notEmptyStringOrDefault(contact.category.id))
         },
 
         resetFields: () => {
@@ -67,6 +72,7 @@ const ContactForm = forwardRef((props, ref) => {
         phone,
         category_id: selectedCategory,
       }
+      console.log(payload, payload)
       await onSumbit(payload)
       addToast({
         text: 'Contato cadastrado com sucesso!',
@@ -125,7 +131,7 @@ const ContactForm = forwardRef((props, ref) => {
   }, [loadContacts])
 
   return (
-    <React.Fragment>
+    <>
       <S.Form onSubmit={handleSubmit} noValidate>
         <FormGroup error={getErrorMessageByFieldName('name')}>
           <Input
@@ -184,7 +190,7 @@ const ContactForm = forwardRef((props, ref) => {
           </Button>
         </S.ButtonContainer>
       </S.Form>
-    </React.Fragment>
+    </>
   )
 })
 

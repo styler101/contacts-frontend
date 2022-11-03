@@ -16,6 +16,7 @@ const EditContact = () => {
   const loadContactData = React.useCallback(async () => {
     try {
       const contact = await ContactService.getContactById(id)
+      console.log('contact', contact)
       setLoading(false)
       setContactName(contact.name)
       contactFormRef.current?.setFieldValues(contact)
@@ -30,15 +31,9 @@ const EditContact = () => {
     }
   }, [id])
 
-  async function handleSubmit(formData) {
-    const contact = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      category_id: formData.category_id,
-    }
-    await ContactService.updateContact(id, contact)
-    setContactName(contact.name)
+  async function handleSubmit(payload) {
+    await ContactService.updateContact(id, payload)
+    setContactName(payload.name)
   }
 
   React.useEffect(() => {

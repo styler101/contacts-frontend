@@ -1,0 +1,8 @@
+Data Mappers -> Serve para transferir dados de forma bidirecional entre as camadas de persistência e domínio.
+O  objetivo é manter os dados do domínio e persistência independentees um do outro.
+
+Nesse exemplo o domínio é o front-end
+
+Dóminio -> é onde está sendo desenvolvido as funcionalidades
+
+Persistência -> cookies, localstorage

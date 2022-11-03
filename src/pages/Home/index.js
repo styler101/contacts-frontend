@@ -15,6 +15,7 @@ import * as S from './styles'
 import RequestError from '../../components/RequestError'
 import EmptyData from '../../components/EmptyData'
 import useSafeAsyncState from '../../hooks/UseSafeAsyncState'
+import contactMapper from '../../services/mappers/ContactMapper'
 
 // SameOriginPolicy(SOP)  -> Politica de mesma origem só existem dentro de navegadores é quando fazendo a requisão para o mesmo endereço só funciona com funções de requisições com javascript.
 // Origin -> é a nossa url conjunto de protolocolo, dominio e porta.
@@ -36,6 +37,7 @@ const Home = () => {
     try {
       setLoading(true)
       const contactList = await contactService.listContacts(sort)
+      console.log(contactList)
       setData(contactList)
     } catch {
       setHasError(true)
@@ -145,63 +147,67 @@ const Home = () => {
                     </S.SearchNotFound>
                   )}
                   {filteredContacts.length > 0 &&
-                    filteredContacts.map((contact) => (
-                      <S.Card key={contact.id}>
-                        <div className='info'>
-                          <div className='contact-name'>
-                            <strong> {contact.name} </strong>
-                            {contact?.category_name && (
-                              <small className='category'>
-                                {' '}
-                                {contact.category_name}{' '}
-                              </small>
-                            )}
+                    filteredContacts.map((contact) => {
+                      return (
+                        <S.Card key={contact.id}>
+                          <div className='info'>
+                            <div className='contact-name'>
+                              <strong> {contact.name} </strong>
+                              {contact?.category.name && (
+                                <small className='category'>
+                                  {' '}
+                                  {contact.category.name}
+                                </small>
+                              )}
+                            </div>
+                            <span> {contact.email} </span>
+                            <span> {formatPhone(contact.phone)}</span>
                           </div>
-                          <span> {contact.email} </span>
-                          <span> {formatPhone(contact.phone)}</span>
-                        </div>
-                        <div className='actions'>
-                          <Link to={`/edit/${contact.id}`}>
-                            <img src={editIcon} alt='edit icon' />
-                          </Link>
-                          <button>
-                            <img
-                              src={trashIcon}
-                              alt='trash icon'
-                              onClick={() =>
-                                setIsDeleteModalVisible(
-                                  <Modal
-                                    isLoading={deleteLoading}
-                                    danger
-                                    actions={{
-                                      onConfirm: {
-                                        confirmHandler: async () => {
-                                          await handleConfirmDelete(contact.id)
-                                          setIsDeleteModalVisible(null)
+                          <div className='actions'>
+                            <Link to={`/edit/${contact.id}`}>
+                              <img src={editIcon} alt='edit icon' />
+                            </Link>
+                            <button>
+                              <img
+                                src={trashIcon}
+                                alt='trash icon'
+                                onClick={() =>
+                                  setIsDeleteModalVisible(
+                                    <Modal
+                                      isLoading={deleteLoading}
+                                      danger
+                                      actions={{
+                                        onConfirm: {
+                                          confirmHandler: async () => {
+                                            await handleConfirmDelete(
+                                              contact.id
+                                            )
+                                            setIsDeleteModalVisible(null)
+                                          },
+                                          confirmLabelButton: 'Deletar',
                                         },
-                                        confirmLabelButton: 'Deletar',
-                                      },
-                                      onCancel: {
-                                        cancelLabelButton: 'Cancelar',
-                                        cancelHandler: () =>
-                                          setIsDeleteModalVisible(null),
-                                      },
-                                    }}
-                                  >
-                                    <h1>
-                                      {' '}
-                                      Tem certeza que deseja remover o contato "
-                                      {contact.name}" ?
-                                    </h1>
-                                    <p> Esta ação não poderá ser desfeita </p>
-                                  </Modal>
-                                )
-                              }
-                            />
-                          </button>
-                        </div>
-                      </S.Card>
-                    ))}
+                                        onCancel: {
+                                          cancelLabelButton: 'Cancelar',
+                                          cancelHandler: () =>
+                                            setIsDeleteModalVisible(null),
+                                        },
+                                      }}
+                                    >
+                                      <h1>
+                                        {' '}
+                                        Tem certeza que deseja remover o contato
+                                        "{contact.name}" ?
+                                      </h1>
+                                      <p> Esta ação não poderá ser desfeita </p>
+                                    </Modal>
+                                  )
+                                }
+                              />
+                            </button>
+                          </div>
+                        </S.Card>
+                      )
+                    })}
                 </React.Fragment>
               </S.Container>
             </React.Fragment>
