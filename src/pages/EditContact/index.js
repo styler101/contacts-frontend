@@ -18,7 +18,7 @@ const EditContact = () => {
       const contact = await ContactService.getContactById(id)
       setLoading(false)
       setContactName(contact.name)
-      contactFormRef.current.setFieldValues(contact)
+      contactFormRef.current?.setFieldValues(contact)
     } catch (error) {
       console.log(error)
       addToast({
